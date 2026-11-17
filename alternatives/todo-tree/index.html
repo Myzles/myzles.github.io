@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Todo Tree alternative that doesn&#x27;t need ripgrep | TODO Lens</title>
-<meta name="description" content="Todo Tree stopped working for you on a new VS Code? TODO Lens is a Todo Tree alternative with its own scanner, so there&#x27;s no ripgrep to break. Free, imports your Todo Tree settings.">
+<title>Todo Tree alternative that doesn&#x27;t need ripgrep | Todoscope</title>
+<meta name="description" content="Todo Tree stopped working for you on a new VS Code? Todoscope is a Todo Tree alternative with its own scanner, so there&#x27;s no ripgrep to break. Free, imports your Todo Tree settings.">
 <link rel="canonical" href="https://myzles.github.io/alternatives/todo-tree/">
-<meta property="og:type" content="article"><meta property="og:title" content="Todo Tree alternative that doesn&#x27;t need ripgrep | TODO Lens"><meta property="og:description" content="Todo Tree stopped working for you on a new VS Code? TODO Lens is a Todo Tree alternative with its own scanner, so there&#x27;s no ripgrep to break. Free, imports your Todo Tree settings."><meta property="og:url" content="https://myzles.github.io/alternatives/todo-tree/">
+<meta property="og:type" content="article"><meta property="og:title" content="Todo Tree alternative that doesn&#x27;t need ripgrep | Todoscope"><meta property="og:description" content="Todo Tree stopped working for you on a new VS Code? Todoscope is a Todo Tree alternative with its own scanner, so there&#x27;s no ripgrep to break. Free, imports your Todo Tree settings."><meta property="og:url" content="https://myzles.github.io/alternatives/todo-tree/">
 <style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
 @media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
 *{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
@@ -13,20 +13,20 @@ h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{col
 th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
 @media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
 footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why did Todo Tree stop working?", "acceptedAnswer": {"@type": "Answer", "text": "Todo Tree calls ripgrep, a separate program, and relies on finding the copy that ships inside VS Code. Newer VS Code builds (1.122 and later) changed that, and Todo Tree hasn't been updated since 2023 to follow. TODO Lens doesn't use ripgrep at all."}}, {"@type": "Question", "name": "Is TODO Lens free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The tree, highlights, filters, custom tags and colours, status-bar count, next/previous navigation and settings import are all free with no cap. Pro adds git features, due dates and reports for $12 a year or $29 once, with a 7-day trial and no card needed."}}, {"@type": "Question", "name": "Will my Todo Tree settings carry over?", "acceptedAnswer": {"@type": "Answer", "text": "Run the Import Todo Tree settings command. It copies tags, colours and your regex, including the $TAGS token."}}, {"@type": "Question", "name": "Does it work in Cursor, Windsurf or remote workspaces?", "acceptedAnswer": {"@type": "Answer", "text": "It runs in VS Code and editors built on it, and it works over Remote SSH, WSL and Codespaces because the scanner runs inside the extension host."}}, {"@type": "Question", "name": "Is it faster than Todo Tree?", "acceptedAnswer": {"@type": "Answer", "text": "Not on raw search. Ripgrep is faster on big repos. The difference is that TODO Lens has nothing external to break, and it skips most of the false matches Todo Tree's default pattern produces."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why did Todo Tree stop working?", "acceptedAnswer": {"@type": "Answer", "text": "Todo Tree calls ripgrep, a separate program, and relies on finding the copy that ships inside VS Code. Newer VS Code builds (1.122 and later) changed that, and Todo Tree hasn't been updated since 2023 to follow. Todoscope doesn't use ripgrep at all."}}, {"@type": "Question", "name": "Is Todoscope free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The tree, highlights, filters, custom tags and colours, status-bar count, next/previous navigation and settings import are all free with no cap. Pro adds git features, due dates and reports for $12 a year or $29 once, with a 7-day trial and no card needed."}}, {"@type": "Question", "name": "Will my Todo Tree settings carry over?", "acceptedAnswer": {"@type": "Answer", "text": "Run the Import Todo Tree settings command. It copies tags, colours and your regex, including the $TAGS token."}}, {"@type": "Question", "name": "Does it work in Cursor, Windsurf or remote workspaces?", "acceptedAnswer": {"@type": "Answer", "text": "It runs in VS Code and editors built on it, and it works over Remote SSH, WSL and Codespaces because the scanner runs inside the extension host."}}, {"@type": "Question", "name": "Is it faster than Todo Tree?", "acceptedAnswer": {"@type": "Answer", "text": "Not on raw search. Ripgrep is faster on big repos. The difference is that Todoscope has nothing external to break, and it skips most of the false matches Todo Tree's default pattern produces."}}]}</script>
 </head><body><main>
 <p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Alternatives</p>
 <h1>A Todo Tree alternative that needs no ripgrep</h1>
 <p>Todo Tree was the default TODO extension for VS Code for years. It hasn't been updated since 2023, and it works by shelling out to ripgrep. When VS Code moved things around in 1.122, a lot of people opened the TODO panel and got "ripgrep not found" or an empty tree. Most of its open issues are about exactly that.</p>
-<p>I built <a href="https://go.myzles.workers.dev/todo-lens/site-seo">TODO Lens</a> because I wanted the same tree without that dependency. It has its own scanner written in JavaScript, so there's no external binary to go missing. It's tested on VS Code 1.146, locally and over Remote SSH, WSL and Codespaces.</p>
-<p><a class="btn" href="https://go.myzles.workers.dev/todo-lens/site-seo">Install TODO Lens from the Marketplace</a></p>
+<p>I built <a href="https://go.myzles.workers.dev/todo-lens/site-seo">Todoscope</a> because I wanted the same tree without that dependency. It has its own scanner written in JavaScript, so there's no external binary to go missing. It's tested on VS Code 1.146, locally and over Remote SSH, WSL and Codespaces.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/todo-lens/site-seo">Install Todoscope from the Marketplace</a></p>
 
 <h2>Switching takes about a minute</h2>
-<p>Install it, then run <code>TODO Lens: Import Todo Tree settings</code> from the command palette. Your tags, colours and custom regex come across, including the <code>$TAGS</code> token. The default tags (TODO, FIXME, BUG, HACK, XXX) work with no setup at all. You can disable Todo Tree afterwards so you don't see two panels.</p>
+<p>Install it, then run <code>Todoscope: Import Todo Tree settings</code> from the command palette. Your tags, colours and custom regex come across, including the <code>$TAGS</code> token. The default tags (TODO, FIXME, BUG, HACK, XXX) work with no setup at all. You can disable Todo Tree afterwards so you don't see two panels.</p>
 
-<h2>TODO Lens vs Todo Tree</h2>
+<h2>Todoscope vs Todo Tree</h2>
 <div class="tbl"><table>
-<tr><th></th><th>TODO Lens</th><th>Todo Tree</th></tr>
+<tr><th></th><th>Todoscope</th><th>Todo Tree</th></tr>
 <tr><td>Needs ripgrep</td><td>No, built-in scanner</td><td>Yes</td></tr>
 <tr><td>Last update</td><td>2026 (version 1.1)</td><td>2023</td></tr>
 <tr><td>Imports Todo Tree settings</td><td>Yes, one command</td><td>n/a</td></tr>
@@ -39,23 +39,23 @@ footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-si
 
 <h2>What I measured</h2>
 <p>I ran both search patterns over 95 public repos (640,704 files). For Todo Tree I used its default regex through ripgrep 14.1.1, since that's what it runs under the hood. I did not run the Todo Tree extension itself, so treat this as a comparison of how each one decides what counts as a TODO.</p>
-<p>When I hand-checked a sample of 45 lines that only Todo Tree's pattern reported, about 9 in 10 were not real TODOs. They were things like <code>BUG("...")</code> function calls, <code>TODO = "todo"</code> constants and struct fields with XXX in the name. Going the other way, TODO Lens picks up comment styles Todo Tree's default pattern misses: <code> * TODO</code> inside block comments, Vim <code>" TODO</code>, OCaml <code>(* TODO</code> and <code>!!! FIXME</code>.</p>
+<p>When I hand-checked a sample of 45 lines that only Todo Tree's pattern reported, about 9 in 10 were not real TODOs. They were things like <code>BUG("...")</code> function calls, <code>TODO = "todo"</code> constants and struct fields with XXX in the name. Going the other way, Todoscope picks up comment styles Todo Tree's default pattern misses: <code> * TODO</code> inside block comments, Vim <code>" TODO</code>, OCaml <code>(* TODO</code> and <code>!!! FIXME</code>.</p>
 <p>It's also stable: 1,000 repeated scans gave identical results with zero crashes.</p>
 
 <h2>Where Todo Tree is still better</h2>
-<p>If Todo Tree works on your setup, it's faster on very large trees, because ripgrep is about as fast as file search gets. It's also completely free, has a huge install base and years of answers on Stack Overflow. TODO Lens isn't 100% accurate either: in a 40-line sample, about 1 in 20 of its hits were borderline (test snapshots, TAP <code># TODO</code> output).</p>
-<p>The reason to switch is simple. If your TODO panel is empty or throwing ripgrep errors, TODO Lens fixes that, and the free version covers everything Todo Tree did.</p>
+<p>If Todo Tree works on your setup, it's faster on very large trees, because ripgrep is about as fast as file search gets. It's also completely free, has a huge install base and years of answers on Stack Overflow. Todoscope isn't 100% accurate either: in a 40-line sample, about 1 in 20 of its hits were borderline (test snapshots, TAP <code># TODO</code> output).</p>
+<p>The reason to switch is simple. If your TODO panel is empty or throwing ripgrep errors, Todoscope fixes that, and the free version covers everything Todo Tree did.</p>
 
 <h2>FAQ</h2>
 <h3>Why did Todo Tree stop working?</h3>
-<p>Todo Tree calls ripgrep, a separate program, and relies on finding the copy that ships inside VS Code. Newer VS Code builds (1.122 and later) changed that, and Todo Tree hasn't been updated since 2023 to follow. TODO Lens doesn't use ripgrep at all.</p>
-<h3>Is TODO Lens free?</h3>
+<p>Todo Tree calls ripgrep, a separate program, and relies on finding the copy that ships inside VS Code. Newer VS Code builds (1.122 and later) changed that, and Todo Tree hasn't been updated since 2023 to follow. Todoscope doesn't use ripgrep at all.</p>
+<h3>Is Todoscope free?</h3>
 <p>Yes. The tree, highlights, filters, custom tags and colours, status-bar count, next/previous navigation and settings import are all free with no cap. Pro adds git features, due dates and reports for $12 a year or $29 once, with a 7-day trial and no card needed.</p>
 <h3>Will my Todo Tree settings carry over?</h3>
 <p>Run the Import Todo Tree settings command. It copies tags, colours and your regex, including the $TAGS token.</p>
 <h3>Does it work in Cursor, Windsurf or remote workspaces?</h3>
 <p>It runs in VS Code and editors built on it, and it works over Remote SSH, WSL and Codespaces because the scanner runs inside the extension host.</p>
 <h3>Is it faster than Todo Tree?</h3>
-<p>Not on raw search. Ripgrep is faster on big repos. The difference is that TODO Lens has nothing external to break, and it skips most of the false matches Todo Tree's default pattern produces.</p>
+<p>Not on raw search. Ripgrep is faster on big repos. The difference is that Todoscope has nothing external to break, and it skips most of the false matches Todo Tree's default pattern produces.</p>
 <footer><p>More comparisons: <a href="/alternatives/hunter-io/">Hunter alternative</a> <a href="/alternatives/apify-contact-details-scraper/">Contact Details Scraper pricing</a> <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicates on Free and Starter</a> <a href="/guides/find-duplicate-contacts-hubspot/">Find duplicate contacts in HubSpot</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. Product names belong to their owners; we are not affiliated with them. Checked November 2026.</p></footer>
 </main></body></html>
