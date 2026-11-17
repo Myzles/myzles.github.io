@@ -1,0 +1,190 @@
+{
+  "name": "Weekly hiring signals for your target accounts (Apify Company Hiring Signals)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "1e5d1a4a-8ad8-4faa-813b-baed9c5852e2",
+      "name": "Every Monday",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"companies\": [\n    \"Stripe\",\n    \"notion.so\",\n    \"ramp.com\",\n    \"Datadog\"\n  ]\n}",
+        "options": {}
+      },
+      "id": "e608134c-1bfe-4868-b698-de345605e40d",
+      "name": "Target accounts",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/myzles~company-hiring-signals/run-sync-get-dataset-items",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "clean",
+              "value": "true"
+            },
+            {
+              "name": "timeout",
+              "value": "280"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ companies: $json.companies, output: 'companies', onlyNew: true, maxJobsPerCompany: 500 }) }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "3e89c5a6-453d-423b-b55d-fed8b9d6da42",
+      "name": "Get hiring signals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Apify API token (Header Auth: Authorization = Bearer YOUR_TOKEN)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "9a490301-5fed-4a20-8e60-fc6e6121e0d2",
+              "leftValue": "={{ $json.signalScore }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "3be055a0-d057-4c22-82f2-7257891e4a3a",
+      "name": "Strong signals only",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0df6a362-f305-492f-8a6e-68f8047b1aa4",
+              "name": "message",
+              "value": "={{ $json.company }}: score {{ $json.signalScore }}, {{ $json.openRoles }} open roles ({{ $json.newSinceLastRun || 0 }} new). {{ $json.buyingSignalsText }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0409aa0e-cbdd-4367-969d-d8e70f8e385f",
+      "name": "Summary line",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Every Monday": {
+      "main": [
+        [
+          {
+            "node": "Target accounts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Target accounts": {
+      "main": [
+        [
+          {
+            "node": "Get hiring signals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get hiring signals": {
+      "main": [
+        [
+          {
+            "node": "Strong signals only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Strong signals only": {
+      "main": [
+        [
+          {
+            "node": "Summary line",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

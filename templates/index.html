@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free n8n and Make templates for lead lists and hiring signals</title>
+<meta name="description" content="Free n8n workflows and Make scenario recipes that find emails and phones for a list of websites, and send weekly hiring signals for your target accounts, using Apify.">
+<link rel="canonical" href="https://myzles.github.io/templates/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:40px}h3{font-size:17px;margin:22px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:9px 16px;border-radius:8px;text-decoration:none;font-weight:600;margin:4px 8px 4px 0}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}</style>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Templates</p>
+<h1>Free n8n and Make templates</h1>
+<p>Ready-made automations for two common sales jobs: getting contact details for a list of companies, and spotting which target accounts are hiring. Both run on Apify, so you pay only for what each run finds (Apify's free plan includes monthly credit).</p>
+
+<h2>Before you start: your Apify token</h2>
+<ol>
+<li>Sign in at <a href="https://console.apify.com">console.apify.com</a> (free account).</li>
+<li>Open <strong>Settings &rsaquo; API &amp; Integrations</strong> and copy your personal API token.</li>
+<li>In n8n, create a <strong>Header Auth</strong> credential: name <code>Authorization</code>, value <code>Bearer YOUR_TOKEN</code>. In Make, connect the Apify app with the same token.</li>
+</ol>
+
+<h2>1. Find emails and phones for a list of websites</h2>
+<p>Paste websites (or a Google Maps lead list) and get each company's best email, phone, social profiles, address and contact page, using <a href="https://apify.com/myzles/website-contact-finder">Website Contact Finder</a>. You pay $4 per 1,000 websites where contacts are found. Websites with nothing found are free.</p>
+<h3>n8n</h3>
+<p><a class="btn" href="n8n-website-contact-finder.json" download>Download the n8n workflow</a></p>
+<p>In n8n, choose <strong>Import from file</strong> (or paste the file's contents onto the canvas). Pick your Header Auth credential in the <em>Find contacts</em> node and edit the website list in <em>Websites to check</em>. The workflow keeps only rows where contacts were found and trims them to the useful columns. Add a Google Sheets, HubSpot or Airtable node at the end to save them.</p>
+<h3>Make</h3>
+<ol>
+<li>Add <strong>Apify &rsaquo; Run an Actor</strong>. Actor: <code>myzles/website-contact-finder</code>. Run synchronously: <strong>Yes</strong>. Input JSON: <code>{"websites": ["acmeplumbing.com", "bluebottlecoffee.com"]}</code> (or map a column from a Google Sheets "Search Rows" module).</li>
+<li>Add <strong>Apify &rsaquo; Get Dataset Items</strong> and map the dataset ID from step 1.</li>
+<li>Add a filter: <code>status</code> equals <code>Contacts found</code>.</li>
+<li>Add <strong>Google Sheets &rsaquo; Add a Row</strong> and map <code>companyName</code>, <code>website</code>, <code>primaryEmail</code>, <code>primaryPhone</code>, <code>linkedin</code> and <code>contactPage</code>.</li>
+</ol>
+
+<h2>2. Weekly hiring signals for your target accounts</h2>
+<p>Every Monday, check your target accounts' career pages and get a short note for each company that is hiring hard: open roles, new roles since last week, which teams are growing and a signal score, using <a href="https://apify.com/myzles/company-hiring-signals">Company Hiring Signals</a>.</p>
+<h3>n8n</h3>
+<p><a class="btn" href="n8n-company-hiring-signals.json" download>Download the n8n workflow</a></p>
+<p>Import it, pick your Header Auth credential in <em>Get hiring signals</em> and put your accounts in <em>Target accounts</em> (names or websites). <em>Strong signals only</em> keeps companies with a score of 50 or more. Connect the <em>Summary line</em> node to Slack, email or your CRM to get the message each week. Because it asks for new roles only, each week shows what changed.</p>
+<h3>Make</h3>
+<ol>
+<li>Start with a <strong>Schedule</strong> set to weekly.</li>
+<li>Add <strong>Apify &rsaquo; Run an Actor</strong>. Actor: <code>myzles/company-hiring-signals</code>. Run synchronously: <strong>Yes</strong>. Input JSON: <code>{"companies": ["Stripe", "ramp.com"], "output": "companies", "onlyNew": true}</code>.</li>
+<li>Add <strong>Apify &rsaquo; Get Dataset Items</strong> with the dataset ID from step 2.</li>
+<li>Add a filter: <code>signalScore</code> greater than or equal to <code>50</code>.</li>
+<li>Add <strong>Slack &rsaquo; Create a Message</strong> (or Gmail) with <code>{{company}}: score {{signalScore}}, {{openRoles}} open roles. {{buyingSignalsText}}</code>.</li>
+</ol>
+
+<h2>Other tools these work with</h2>
+<p>The same pattern (Run an Actor, then Get Dataset Items) works with <a href="https://apify.com/myzles/decision-maker-finder">Decision Maker Finder</a>, <a href="https://apify.com/myzles/telegram-channel-scraper">Telegram Channel Scraper</a> and <a href="https://apify.com/myzles/google-ads-transparency-scraper">Google Ads Transparency Scraper</a>. Change the actor name and the input.</p>
+
+<footer><a href="/">Myzles</a> <a href="/products/">Products</a> <a href="/guides/find-duplicate-contacts-hubspot/">Guides</a></footer>
+</main></body></html>

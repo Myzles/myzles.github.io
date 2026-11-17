@@ -1,0 +1,226 @@
+{
+  "name": "Find emails and phones for a list of websites (Apify Website Contact Finder)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "638c2b95-d4e9-4003-a200-4acbade7a8f4",
+      "name": "Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"websites\": [\n    \"acmeplumbing.com\",\n    \"https://www.example-dental.com\",\n    \"bluebottlecoffee.com\"\n  ]\n}",
+        "options": {}
+      },
+      "id": "4230fe53-39c6-43b8-8775-7f9fe0d624cc",
+      "name": "Websites to check",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/myzles~website-contact-finder/run-sync-get-dataset-items",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "clean",
+              "value": "true"
+            },
+            {
+              "name": "timeout",
+              "value": "280"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ websites: $json.websites }) }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "0a9f7261-049c-4305-943a-a45bf9694bb7",
+      "name": "Find contacts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Apify API token (Header Auth: Authorization = Bearer YOUR_TOKEN)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "ba730ef2-75d7-4409-8bcb-4987998edf68",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "Contacts found",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "c2afdd29-b6fe-451e-861f-0ba549bb4d32",
+      "name": "Only rows with contacts",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "de23d942-838d-45cb-8537-6f3ec8643fbf",
+              "name": "companyName",
+              "value": "={{ $json.companyName }}",
+              "type": "string"
+            },
+            {
+              "id": "a8a069cb-0168-4dd3-9811-556312dd9d16",
+              "name": "website",
+              "value": "={{ $json.website }}",
+              "type": "string"
+            },
+            {
+              "id": "a3134ea9-7a77-45c0-9cb7-57c85e6e8329",
+              "name": "primaryEmail",
+              "value": "={{ $json.primaryEmail }}",
+              "type": "string"
+            },
+            {
+              "id": "3d75cb5d-c083-42b9-8e4c-610b44861ecf",
+              "name": "primaryPhone",
+              "value": "={{ $json.primaryPhone }}",
+              "type": "string"
+            },
+            {
+              "id": "45c31290-70b4-4be0-bb0d-9509111172ff",
+              "name": "linkedin",
+              "value": "={{ $json.linkedin }}",
+              "type": "string"
+            },
+            {
+              "id": "8f892d2b-b28d-42cd-a313-54c5ba33e26c",
+              "name": "facebook",
+              "value": "={{ $json.facebook }}",
+              "type": "string"
+            },
+            {
+              "id": "a0edf3e8-06a3-4fd8-b920-f3270e848331",
+              "name": "instagram",
+              "value": "={{ $json.instagram }}",
+              "type": "string"
+            },
+            {
+              "id": "f0f06600-18e7-4896-b42e-604a409153c1",
+              "name": "address",
+              "value": "={{ $json.address }}",
+              "type": "string"
+            },
+            {
+              "id": "cadf5cd0-202d-4d94-9407-5c1f5ad415e8",
+              "name": "contactPage",
+              "value": "={{ $json.contactPage }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "74657611-9aab-48af-b9d4-025d1f100186",
+      "name": "Keep the useful columns",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Websites to check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Websites to check": {
+      "main": [
+        [
+          {
+            "node": "Find contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find contacts": {
+      "main": [
+        [
+          {
+            "node": "Only rows with contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Only rows with contacts": {
+      "main": [
+        [
+          {
+            "node": "Keep the useful columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}
