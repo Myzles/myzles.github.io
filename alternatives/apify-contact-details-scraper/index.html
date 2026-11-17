@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Details Scraper alternative: per-site vs per-page pricing on Apify</title>
+<meta name="description" content="Per-page or per-result? How the pricing of Apify contact scrapers adds up on a real lead list, and when a flat price per website with contacts is cheaper (and when it isn&#x27;t).">
+<link rel="canonical" href="https://myzles.github.io/alternatives/apify-contact-details-scraper/">
+<meta property="og:type" content="article"><meta property="og:title" content="Contact Details Scraper alternative: per-site vs per-page pricing on Apify"><meta property="og:description" content="Per-page or per-result? How the pricing of Apify contact scrapers adds up on a real lead list, and when a flat price per website with contacts is cheaper (and when it isn&#x27;t)."><meta property="og:url" content="https://myzles.github.io/alternatives/apify-contact-details-scraper/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What's the difference between per-page and per-result pricing?", "acceptedAnswer": {"@type": "Answer", "text": "Per-page pricing charges for every page the crawler opens, whether or not it finds anything. Per-result pricing charges only for an outcome, here a website where contacts were found."}}, {"@type": "Question", "name": "Is Website Contact Finder the cheapest contact scraper on Apify?", "acceptedAnswer": {"@type": "Answer", "text": "No. Some actors charge $0.002 per site, and a per-page scraper limited to one page per site is cheaper too. It's priced so you never pay for empty or dead sites."}}, {"@type": "Question", "name": "Does it find more emails than Contact Details Scraper?", "acceptedAnswer": {"@type": "Answer", "text": "I don't know. I didn't run the paid competitors. Run both on a sample of your own list to see."}}, {"@type": "Question", "name": "What happens if my run times out?", "acceptedAnswer": {"@type": "Answer", "text": "It stops a little before the limit, writes a row for every site it didn't reach marked Not checked, and doesn't charge for those."}}, {"@type": "Question", "name": "Can I cap my spend?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Apify's max-spend setting stops the run cleanly when you reach it."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Alternatives</p>
+<h1>Contact scrapers on Apify: per-page vs per-result pricing</h1>
+<p>If you search the Apify Store for a contact or email scraper, the most popular result is Contact Details Scraper (vdrmota/contact-info-scraper). It's well established, with about 4,000 monthly users, and it does the job. Its pricing is per page crawled, plus a start fee. That's worth understanding before you run it on a big list, because a business website is rarely one page.</p>
+<p>I built <a href="https://apify.com/myzles/website-contact-finder?utm_source=site&utm_medium=seo&utm_campaign=website-contact-finder">Website Contact Finder</a> with a different model: one flat price per website, charged only when contacts are found. Here's how the two compare in practice.</p>
+
+<h2>The math on 1,000 business websites</h2>
+<p>To find contacts, a scraper usually needs the homepage plus the contact page, and often the about or footer-linked pages too. Say that's 3 pages per site on average, and that 7 or 8 in 10 of the sites actually have contact details.</p>
+<div class="tbl"><table>
+<tr><th>Model</th><th>How it's charged</th><th>1,000 sites, ~3 pages each</th></tr>
+<tr><td>Per page ($0.002 per page)</td><td>Every page crawled, found or not, plus a start fee and any add-ons</td><td>About $6 plus start fee</td></tr>
+<tr><td>Per website with contacts ($0.004)</td><td>Only sites where contacts came back</td><td>About $3 if 750 sites have contacts, $4 at most</td></tr>
+</table></div>
+<p class="muted">These are list prices on Apify's Free plan as of November 2026. Your page counts depend on your crawl settings and the sites.</p>
+
+<h2>When per-page is cheaper</h2>
+<p>Be fair to the per-page model: if you only crawl one page per site, $0.002 per page beats $0.004 per site. And Website Contact Finder isn't the cheapest per-site option either. poidata/contact-details-scraper charges $0.002 per site. Pick on what you need, not on price alone.</p>
+
+<h2>Side by side</h2>
+<div class="tbl"><table>
+<tr><th></th><th>Website Contact Finder</th><th>Contact Details Scraper (vdrmota)</th></tr>
+<tr><td>Pricing</td><td>$0.004 per site with contacts, nothing for empty sites</td><td>$0.002 per page plus start fee</td></tr>
+<tr><td>Track record</td><td>New (launched November 2026)</td><td>About 4,000 users a month, many reviews</td></tr>
+<tr><td>Input</td><td>Websites, company names or a Google Maps dataset</td><td>Start URLs</td></tr>
+<tr><td>Output</td><td>One row per business, best email first, phones with country</td><td>Contacts found per crawl</td></tr>
+<tr><td>JavaScript-only sites</td><td>Opens a real browser when needed</td><td>Configurable crawler</td></tr>
+<tr><td>Crawl control</td><td>Fixed, tuned for contact pages</td><td>More options (depth, page limits, add-ons)</td></tr>
+<tr><td>At the time limit</td><td>Stops cleanly, unchecked sites listed free</td><td>Varies by settings</td></tr>
+</table></div>
+
+<h2>What I can tell you about reliability</h2>
+<p>Over 1,186 real sites, run twice, Website Contact Finder had zero crashes and gave every input a row. I haven't run the paid competitors myself, so I can't tell you which finds more emails. The fair test is to run both on 50 of your own sites and compare. With Apify's free credit that costs you nothing.</p>
+<p><a class="btn" href="https://apify.com/myzles/website-contact-finder?utm_source=site&utm_medium=seo&utm_campaign=website-contact-finder">Run Website Contact Finder on your list</a></p>
+
+<h2>FAQ</h2>
+<h3>What&#x27;s the difference between per-page and per-result pricing?</h3>
+<p>Per-page pricing charges for every page the crawler opens, whether or not it finds anything. Per-result pricing charges only for an outcome, here a website where contacts were found.</p>
+<h3>Is Website Contact Finder the cheapest contact scraper on Apify?</h3>
+<p>No. Some actors charge $0.002 per site, and a per-page scraper limited to one page per site is cheaper too. It's priced so you never pay for empty or dead sites.</p>
+<h3>Does it find more emails than Contact Details Scraper?</h3>
+<p>I don't know. I didn't run the paid competitors. Run both on a sample of your own list to see.</p>
+<h3>What happens if my run times out?</h3>
+<p>It stops a little before the limit, writes a row for every site it didn't reach marked Not checked, and doesn't charge for those.</p>
+<h3>Can I cap my spend?</h3>
+<p>Yes. Apify's max-spend setting stops the run cleanly when you reach it.</p>
+<footer><p>More comparisons: <a href="/alternatives/todo-tree/">Todo Tree alternative</a> <a href="/alternatives/hunter-io/">Hunter alternative</a> <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicates on Free and Starter</a> <a href="/guides/find-duplicate-contacts-hubspot/">Find duplicate contacts in HubSpot</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:MylesCar2828@outlook.com">MylesCar2828@outlook.com</a>. Product names belong to their owners; we are not affiliated with them. Checked November 2026.</p></footer>
+</main></body></html>

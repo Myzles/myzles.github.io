@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merge HubSpot duplicates on Free and Starter plans | Dupe Sweep</title>
+<meta name="description" content="HubSpot&#x27;s bulk duplicate merge needs a Professional plan. Dupe Sweep finds and bulk-merges duplicate contacts and companies on every HubSpot plan, including Free and Starter.">
+<link rel="canonical" href="https://myzles.github.io/alternatives/hubspot-duplicate-management/">
+<meta property="og:type" content="article"><meta property="og:title" content="Merge HubSpot duplicates on Free and Starter plans | Dupe Sweep"><meta property="og:description" content="HubSpot&#x27;s bulk duplicate merge needs a Professional plan. Dupe Sweep finds and bulk-merges duplicate contacts and companies on every HubSpot plan, including Free and Starter."><meta property="og:url" content="https://myzles.github.io/alternatives/hubspot-duplicate-management/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I merge duplicates in HubSpot Free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, one pair at a time from a contact record (Actions, then Merge). Bulk merging isn't included in Free or Starter. Dupe Sweep adds it on those plans."}}, {"@type": "Question", "name": "Can a HubSpot merge be undone?", "acceptedAnswer": {"@type": "Answer", "text": "No. HubSpot doesn't allow it. Dupe Sweep shows every match before merging and keeps a log of the merged-away values so you can recreate a record if you need to."}}, {"@type": "Question", "name": "Which record does Dupe Sweep keep?", "acceptedAnswer": {"@type": "Answer", "text": "The one with the most filled-in fields, or the older one if they tie. HubSpot then combines the activity onto the kept record."}}, {"@type": "Question", "name": "What does Dupe Sweep need access to?", "acceptedAnswer": {"@type": "Answer", "text": "Read and edit access to contacts and companies, nothing else. Matching runs in your browser. You need to be a Super Admin or have App Marketplace access to connect it."}}, {"@type": "Question", "name": "Why does HubSpot say the app is unverified?", "acceptedAnswer": {"@type": "Answer", "text": "Dupe Sweep isn't listed on the HubSpot App Marketplace yet. Until it is, HubSpot shows a warning on the connect screen and asks you to confirm."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Alternatives</p>
+<h1>Merge HubSpot duplicates on Free and Starter</h1>
+<p>HubSpot does stop exact duplicate emails from being created. Everything else gets through: Bob Smith and Robert Smith at the same company, the same phone written three ways, "Acme Inc" and "The Acme Company". HubSpot has a duplicate tool, but bulk merging and custom matching rules are part of Data Hub Professional. On Free or Starter you're left merging records one at a time.</p>
+<p><a href="https://myzles.github.io/dupe-sweep/?utm_source=site&utm_medium=seo&utm_campaign=dupe-sweep">Dupe Sweep</a> is a HubSpot app I built for that gap. It scans your contacts and companies, scores each possible match, and lets you merge hundreds of sets in one go.</p>
+<p><a class="btn" href="https://dupe-sweep.myzles.workers.dev/install?utm_source=site&utm_medium=seo&utm_campaign=dupe-sweep">Connect HubSpot (free)</a> <a href="https://myzles.github.io/dupe-sweep/?utm_source=site&utm_medium=seo&utm_campaign=dupe-sweep">or read how it works</a></p>
+
+<h2>How it decides what's a duplicate</h2>
+<p>Every match gets a confidence score. 90 and up is selected for merging. 70 to 89 waits for you to look at it side by side. Below 70 isn't shown. A shared name on its own is never enough. It needs something to back it up, like the same company, the same work email domain or the same phone. Nicknames, small typos, swapped first and last names, Gmail dots and plus tags, and company suffixes are all handled.</p>
+<p>Nothing merges until you press the button, and every merge is logged with the values of the record that was merged away, so you can download them as a CSV.</p>
+
+<h2>Dupe Sweep vs HubSpot's own duplicate tool</h2>
+<div class="tbl"><table>
+<tr><th></th><th>Dupe Sweep</th><th>HubSpot native</th></tr>
+<tr><td>Plans</td><td>Every plan, including Free and Starter</td><td>Bulk merge and custom rules need Data Hub Professional</td></tr>
+<tr><td>Install</td><td>Connect via OAuth (not on the Marketplace yet)</td><td>Built in, nothing to install</td></tr>
+<tr><td>Objects</td><td>Contacts and companies</td><td>Contacts and companies</td></tr>
+<tr><td>Confidence tiers</td><td>Merge-ready (90+) and review (70-89)</td><td>One list with a match score</td></tr>
+<tr><td>Price</td><td>Free for 25 merges a month, Pro $9/month or $90/year</td><td>Included in the plan</td></tr>
+</table></div>
+
+<h2>A test against HubSpot's suggestions</h2>
+<p>I seeded two HubSpot test accounts with messy contacts and companies where I knew the right answer (4,657 and 3,312 contacts), then read HubSpot's own duplicate suggestions before merging anything.</p>
+<ul>
+<li>Contacts: HubSpot listed about 3 times as many pairs as there were real duplicates, and only 29% and 35% of its list was right. Its 0.9+ scored suggestions were better, at 79% and 91%.</li>
+<li>Companies: HubSpot was accurate when it made a suggestion (97 to 98% right) but found about 78% of the real duplicates. Dupe Sweep's merge-ready tier found 94% with no wrong pairs.</li>
+<li>Dupe Sweep's merge-ready tier had zero wrong pairs on both accounts, and the real merges through HubSpot's API finished with record counts exactly as expected.</li>
+</ul>
+<p class="muted">Caveat: this is generated test data, not your CRM. Real accounts will differ, and HubSpot may refine its suggestions over hours. I'm reporting what I saw, not a guarantee.</p>
+
+<h2>Other options worth knowing</h2>
+<p>Established apps like Insycle and Dedupely cover more objects and can run deduplication automatically on a schedule. If you need deals or tickets cleaned up, or hands-off merging, look at them. Dupe Sweep is deliberately small: contacts and companies, reviewed by a person, cheap enough for a Starter account.</p>
+<p>New to this? There's a step-by-step guide: <a href="/guides/find-duplicate-contacts-hubspot/">how to find duplicate contacts in HubSpot</a>.</p>
+
+<h2>FAQ</h2>
+<h3>Can I merge duplicates in HubSpot Free?</h3>
+<p>Yes, one pair at a time from a contact record (Actions, then Merge). Bulk merging isn't included in Free or Starter. Dupe Sweep adds it on those plans.</p>
+<h3>Can a HubSpot merge be undone?</h3>
+<p>No. HubSpot doesn't allow it. Dupe Sweep shows every match before merging and keeps a log of the merged-away values so you can recreate a record if you need to.</p>
+<h3>Which record does Dupe Sweep keep?</h3>
+<p>The one with the most filled-in fields, or the older one if they tie. HubSpot then combines the activity onto the kept record.</p>
+<h3>What does Dupe Sweep need access to?</h3>
+<p>Read and edit access to contacts and companies, nothing else. Matching runs in your browser. You need to be a Super Admin or have App Marketplace access to connect it.</p>
+<h3>Why does HubSpot say the app is unverified?</h3>
+<p>Dupe Sweep isn't listed on the HubSpot App Marketplace yet. Until it is, HubSpot shows a warning on the connect screen and asks you to confirm.</p>
+<footer><p>More comparisons: <a href="/alternatives/todo-tree/">Todo Tree alternative</a> <a href="/alternatives/hunter-io/">Hunter alternative</a> <a href="/alternatives/apify-contact-details-scraper/">Contact Details Scraper pricing</a> <a href="/guides/find-duplicate-contacts-hubspot/">Find duplicate contacts in HubSpot</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:MylesCar2828@outlook.com">MylesCar2828@outlook.com</a>. Product names belong to their owners; we are not affiliated with them. Checked November 2026.</p></footer>
+</main></body></html>

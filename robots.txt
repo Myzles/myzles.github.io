@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://myzles.github.io/sitemap.xml

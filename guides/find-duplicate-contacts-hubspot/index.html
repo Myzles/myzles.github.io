@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to find duplicate contacts in HubSpot (any plan)</title>
+<meta name="description" content="Three ways to find and merge duplicate contacts in HubSpot: the built-in duplicate tool, an export and spreadsheet check, and a bulk app for Free and Starter accounts.">
+<link rel="canonical" href="https://myzles.github.io/guides/find-duplicate-contacts-hubspot/">
+<meta property="og:type" content="article"><meta property="og:title" content="How to find duplicate contacts in HubSpot (any plan)"><meta property="og:description" content="Three ways to find and merge duplicate contacts in HubSpot: the built-in duplicate tool, an export and spreadsheet check, and a bulk app for Free and Starter accounts."><meta property="og:url" content="https://myzles.github.io/guides/find-duplicate-contacts-hubspot/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does HubSpot automatically remove duplicate contacts?", "acceptedAnswer": {"@type": "Answer", "text": "It prevents a new contact with the exact same email as an existing one. It doesn't merge contacts with different emails, nicknames or typos on its own."}}, {"@type": "Question", "name": "How do I merge two contacts in HubSpot?", "acceptedAnswer": {"@type": "Answer", "text": "Open one contact, click Actions, choose Merge, search for the other contact, then pick which one to keep as primary. This works on every plan."}}, {"@type": "Question", "name": "Can I bulk merge duplicates in HubSpot Starter?", "acceptedAnswer": {"@type": "Answer", "text": "Not with HubSpot's own tools. Bulk merging is part of Data Hub Professional. Apps such as Dupe Sweep add it on Free and Starter."}}, {"@type": "Question", "name": "Can I undo a merge in HubSpot?", "acceptedAnswer": {"@type": "Answer", "text": "No. Check each pair first, and keep a record of the merged-away values. Dupe Sweep keeps this log for you."}}, {"@type": "Question", "name": "How do I find duplicate companies in HubSpot?", "acceptedAnswer": {"@type": "Answer", "text": "The same three methods work. Companies often duplicate on name variants like Inc or LLC and on www versus non-www domains, so normalize those first if you use a spreadsheet."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Guides</p>
+<h1>How to find duplicate contacts in HubSpot</h1>
+<p>Duplicates creep in from form fills, list imports, sales reps adding people by hand, and integrations that don't check first. HubSpot blocks a second contact with the exact same email, but it won't stop "Bob" and "Robert" at the same company, or the same person with a work and a personal address.</p>
+<p>Here are three ways to find them, depending on your plan and how many you have.</p>
+
+<h2>1. HubSpot's built-in duplicate tool</h2>
+<p>On plans that include it, go to <strong>Contacts</strong>, open <strong>Actions</strong> and choose <strong>Manage duplicates</strong>. HubSpot lists pairs it thinks match. You open each one, pick the record to keep and merge. Bulk merge and custom rules need Data Hub Professional.</p>
+<p>Two things to watch. For contacts, the list can be long and noisy, so check pairs before merging. In a test I ran, under half the suggested contact pairs were real duplicates, though the highest-scored ones were much better. And merges can't be undone.</p>
+
+<h2>2. Export and check in a spreadsheet</h2>
+<p>This works on any plan and costs nothing, but it's slow.</p>
+<ol>
+<li>Export your contacts with first name, last name, email, phone and company.</li>
+<li>Add a helper column with a cleaned phone (digits only) and another with the email domain.</li>
+<li>Sort by last name, then by company, and scan for neighbours that look alike. Use <code>COUNTIF</code> on the cleaned phone and on first-plus-last name to flag repeats.</li>
+<li>For each real duplicate, open one of the records in HubSpot, click <strong>Actions</strong>, then <strong>Merge</strong>, and pick the other record.</li>
+</ol>
+<p>Fine for 20 duplicates. Painful for 400, and exact-match formulas miss nicknames and typos.</p>
+
+<h2>3. Use an app to scan and bulk merge</h2>
+<p>If you're on Free or Starter, or the built-in list is too noisy, an app can do the matching and merging for you. I built <a href="https://myzles.github.io/dupe-sweep/?utm_source=site&utm_medium=seo&utm_campaign=dupe-sweep">Dupe Sweep</a> for this. It scans contacts and companies, gives every match a confidence score, pre-selects only the 90+ matches for merging, and logs every merge with the merged-away values. Free covers 25 merges a month. Pro is $9 a month for unlimited merges.</p>
+<p><a class="btn" href="https://dupe-sweep.myzles.workers.dev/install?utm_source=site&utm_medium=seo&utm_campaign=dupe-sweep">Scan your HubSpot for free</a></p>
+
+<h2>Comparing the three</h2>
+<div class="tbl"><table>
+<tr><th></th><th>Built-in tool</th><th>Spreadsheet</th><th>Dupe Sweep</th></tr>
+<tr><td>Plan</td><td>Plans that include it; bulk needs Data Hub Pro</td><td>Any</td><td>Any, including Free</td></tr>
+<tr><td>Catches nicknames and typos</td><td>Partly</td><td>No</td><td>Yes</td></tr>
+<tr><td>Bulk merge</td><td>Pro only</td><td>No</td><td>Yes</td></tr>
+<tr><td>Cost</td><td>Included</td><td>Your time</td><td>Free for 25 merges a month, then $9/month</td></tr>
+</table></div>
+
+<h2>Keeping duplicates from coming back</h2>
+<ul>
+<li>Make email required on your forms, so HubSpot's own email check can do its job.</li>
+<li>Before importing a list, match it against existing contacts on email and update instead of creating.</li>
+<li>Check what your integrations do when they see a new email for a known person.</li>
+<li>Run a scan monthly. Ten minutes a month beats a weekend cleanup once a year.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>Does HubSpot automatically remove duplicate contacts?</h3>
+<p>It prevents a new contact with the exact same email as an existing one. It doesn't merge contacts with different emails, nicknames or typos on its own.</p>
+<h3>How do I merge two contacts in HubSpot?</h3>
+<p>Open one contact, click Actions, choose Merge, search for the other contact, then pick which one to keep as primary. This works on every plan.</p>
+<h3>Can I bulk merge duplicates in HubSpot Starter?</h3>
+<p>Not with HubSpot's own tools. Bulk merging is part of Data Hub Professional. Apps such as Dupe Sweep add it on Free and Starter.</p>
+<h3>Can I undo a merge in HubSpot?</h3>
+<p>No. Check each pair first, and keep a record of the merged-away values. Dupe Sweep keeps this log for you.</p>
+<h3>How do I find duplicate companies in HubSpot?</h3>
+<p>The same three methods work. Companies often duplicate on name variants like Inc or LLC and on www versus non-www domains, so normalize those first if you use a spreadsheet.</p>
+<footer><p>More comparisons: <a href="/alternatives/todo-tree/">Todo Tree alternative</a> <a href="/alternatives/hunter-io/">Hunter alternative</a> <a href="/alternatives/apify-contact-details-scraper/">Contact Details Scraper pricing</a> <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicates on Free and Starter</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:MylesCar2828@outlook.com">MylesCar2828@outlook.com</a>. Product names belong to their owners; we are not affiliated with them. Checked November 2026.</p></footer>
+</main></body></html>

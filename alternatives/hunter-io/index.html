@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hunter.io alternative for small-business websites | Website Contact Finder</title>
+<meta name="description" content="Need emails and phone numbers for local businesses, not just people at big companies? Website Contact Finder reads each business&#x27;s own site and charges only when it finds contacts.">
+<link rel="canonical" href="https://myzles.github.io/alternatives/hunter-io/">
+<meta property="og:type" content="article"><meta property="og:title" content="Hunter.io alternative for small-business websites | Website Contact Finder"><meta property="og:description" content="Need emails and phone numbers for local businesses, not just people at big companies? Website Contact Finder reads each business&#x27;s own site and charges only when it finds contacts."><meta property="og:url" content="https://myzles.github.io/alternatives/hunter-io/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Website Contact Finder a Hunter replacement?", "acceptedAnswer": {"@type": "Answer", "text": "For local and small-business lists, mostly yes. For finding named employees at larger companies, no. Hunter's pattern guessing and verification are built for that."}}, {"@type": "Question", "name": "How much does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "$4 per 1,000 websites where contacts are found on Apify's Free and Bronze plans, less on higher plans. Sites with no contacts, errors and duplicates cost nothing. There's no subscription."}}, {"@type": "Question", "name": "Can I feed it a Google Maps scrape?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Give it the dataset ID from a Google Maps scraper run and it reads the website column for you."}}, {"@type": "Question", "name": "Does it guess email addresses?", "acceptedAnswer": {"@type": "Answer", "text": "No. Every email it returns was published on the business's own site. It ranks them and checks that the domain can receive mail."}}, {"@type": "Question", "name": "Do I need to code?", "acceptedAnswer": {"@type": "Answer", "text": "No. You can paste sites into the Apify form and download the results as CSV or Excel. There's also an API if you want to automate it."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Alternatives</p>
+<h1>A Hunter alternative for small-business websites</h1>
+<p>Hunter is very good at one job: give it a company domain and it tells you the people who work there and the likely format of their email addresses, then verifies them. If you sell to companies with a sales team and a LinkedIn page, it's hard to beat.</p>
+<p>Local lead lists are a different problem. A plumber, a dental clinic or a family-run hotel usually has one inbox, a phone number, maybe a Facebook page and a contact form, and all of that is sitting on their own website. You don't need an email pattern, you need someone to open 500 sites and copy down what's there.</p>
+<p>That's what <a href="https://apify.com/myzles/website-contact-finder?utm_source=site&utm_medium=seo&utm_campaign=website-contact-finder">Website Contact Finder</a> does. It's an Apify actor. You paste in websites, company names or the dataset from a Google Maps scrape, and you get one row per business back.</p>
+<p><a class="btn" href="https://apify.com/myzles/website-contact-finder?utm_source=site&utm_medium=seo&utm_campaign=website-contact-finder">Try Website Contact Finder on Apify</a></p>
+
+<h2>What you get for each business</h2>
+<ul>
+<li>Emails, best one first (a company-domain address is ranked above a free mailbox, and a team inbox is labelled as such)</li>
+<li>Phone numbers in international format, with the country</li>
+<li>Social profiles, address, the contact page and the contact form link</li>
+<li>A status for every input, so you know which sites had nothing and which were unreachable</li>
+</ul>
+<p>Sites that only load their content with JavaScript are opened in a real browser when needed. Obfuscated addresses like <code>name [at] domain</code> and Cloudflare-protected emails are decoded.</p>
+
+<h2>Website Contact Finder vs Hunter</h2>
+<div class="tbl"><table>
+<tr><th></th><th>Website Contact Finder</th><th>Hunter</th></tr>
+<tr><td>Best for</td><td>Local and small businesses, Google Maps lists</td><td>Named people at companies with a domain</td></tr>
+<tr><td>Where the data comes from</td><td>The business's own website, read live</td><td>Hunter's index plus email pattern guessing</td></tr>
+<tr><td>Phone numbers</td><td>Yes, normalized with country</td><td>Not its focus</td></tr>
+<tr><td>Contact form link, socials, address</td><td>Yes</td><td>Not its focus</td></tr>
+<tr><td>Finds a specific person's email</td><td>Only if it's on the site</td><td>Yes, that's its strength</td></tr>
+<tr><td>Email verification</td><td>Checks the domain accepts mail (MX)</td><td>Full verifier</td></tr>
+<tr><td>Chrome extension, CRM integrations, sending</td><td>No. It's an API and spreadsheet export</td><td>Yes</td></tr>
+<tr><td>Pricing</td><td>$4 per 1,000 sites with contacts found, nothing for empty sites, no subscription</td><td>Free plan, then monthly plans with a search allowance</td></tr>
+</table></div>
+
+<h2>How the pricing works</h2>
+<p>You pay $0.004 for each website where contacts were found (it drops to $0.0025 on higher Apify plans). Sites with nothing on them, sites that are down, invalid inputs and repeats are free. There's no start fee and no monthly plan. Apify gives new accounts a free monthly credit, which is enough to test it on a real list.</p>
+
+<h2>Is it reliable?</h2>
+<p>I tested it on 1,186 real businesses and tech companies, twice: zero crashes, and every input came back with a row. If a run hits its time limit, the sites it didn't get to are listed as "Not checked" and you aren't charged for them.</p>
+
+<h2>When to stick with Hunter</h2>
+<p>If you need the email of a particular person, like the head of marketing at a 200-person company, use Hunter or a similar people-finder. Website Contact Finder can only return what the business has published, and about a third of the emails we knew about from other sources weren't on the business's site at all. It also has no browser extension or outreach tools. It's a data step, not a sales platform.</p>
+
+<h2>FAQ</h2>
+<h3>Is Website Contact Finder a Hunter replacement?</h3>
+<p>For local and small-business lists, mostly yes. For finding named employees at larger companies, no. Hunter's pattern guessing and verification are built for that.</p>
+<h3>How much does it cost?</h3>
+<p>$4 per 1,000 websites where contacts are found on Apify's Free and Bronze plans, less on higher plans. Sites with no contacts, errors and duplicates cost nothing. There's no subscription.</p>
+<h3>Can I feed it a Google Maps scrape?</h3>
+<p>Yes. Give it the dataset ID from a Google Maps scraper run and it reads the website column for you.</p>
+<h3>Does it guess email addresses?</h3>
+<p>No. Every email it returns was published on the business's own site. It ranks them and checks that the domain can receive mail.</p>
+<h3>Do I need to code?</h3>
+<p>No. You can paste sites into the Apify form and download the results as CSV or Excel. There's also an API if you want to automate it.</p>
+<footer><p>More comparisons: <a href="/alternatives/todo-tree/">Todo Tree alternative</a> <a href="/alternatives/apify-contact-details-scraper/">Contact Details Scraper pricing</a> <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicates on Free and Starter</a> <a href="/guides/find-duplicate-contacts-hubspot/">Find duplicate contacts in HubSpot</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:MylesCar2828@outlook.com">MylesCar2828@outlook.com</a>. Product names belong to their owners; we are not affiliated with them. Checked November 2026.</p></footer>
+</main></body></html>
