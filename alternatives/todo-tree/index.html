@@ -18,8 +18,8 @@ footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-si
 <p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Alternatives</p>
 <h1>A Todo Tree alternative that needs no ripgrep</h1>
 <p>Todo Tree was the default TODO extension for VS Code for years. It hasn't been updated since 2023, and it works by shelling out to ripgrep. When VS Code moved things around in 1.122, a lot of people opened the TODO panel and got "ripgrep not found" or an empty tree. Most of its open issues are about exactly that.</p>
-<p>I built <a href="https://marketplace.visualstudio.com/items?itemName=myzles.myzles-todo-lens&utm_source=site&utm_medium=seo&utm_campaign=todo-lens">TODO Lens</a> because I wanted the same tree without that dependency. It has its own scanner written in JavaScript, so there's no external binary to go missing. It's tested on VS Code 1.146, locally and over Remote SSH, WSL and Codespaces.</p>
-<p><a class="btn" href="https://marketplace.visualstudio.com/items?itemName=myzles.myzles-todo-lens&utm_source=site&utm_medium=seo&utm_campaign=todo-lens">Install TODO Lens from the Marketplace</a></p>
+<p>I built <a href="https://go.myzles.workers.dev/todo-lens/site-seo">TODO Lens</a> because I wanted the same tree without that dependency. It has its own scanner written in JavaScript, so there's no external binary to go missing. It's tested on VS Code 1.146, locally and over Remote SSH, WSL and Codespaces.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/todo-lens/site-seo">Install TODO Lens from the Marketplace</a></p>
 
 <h2>Switching takes about a minute</h2>
 <p>Install it, then run <code>TODO Lens: Import Todo Tree settings</code> from the command palette. Your tags, colours and custom regex come across, including the <code>$TAGS</code> token. The default tags (TODO, FIXME, BUG, HACK, XXX) work with no setup at all. You can disable Todo Tree afterwards so you don't see two panels.</p>
