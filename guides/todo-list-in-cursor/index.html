@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to see all TODOs in Cursor (search, linter or an extension)</title>
+<meta name="description" content="List every TODO and FIXME in a Cursor project: workspace search with a regex, a linter rule, or a TODO extension installed from Open VSX or a .vsix file.">
+<link rel="canonical" href="https://myzles.github.io/guides/todo-list-in-cursor/">
+<meta property="og:type" content="article"><meta property="og:title" content="How to see all TODOs in Cursor (search, linter or an extension)"><meta property="og:description" content="List every TODO and FIXME in a Cursor project: workspace search with a regex, a linter rule, or a TODO extension installed from Open VSX or a .vsix file."><meta property="og:url" content="https://myzles.github.io/guides/todo-list-in-cursor/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+pre{background:var(--soft);padding:10px 12px;border-radius:6px;overflow-x:auto;font-size:14px}pre code{background:none;padding:0}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "How to see all TODOs in Cursor", "description": "List every TODO and FIXME in a Cursor project: workspace search with a regex, a linter rule, or a TODO extension installed from Open VSX or a .vsix file.", "url": "https://myzles.github.io/guides/todo-list-in-cursor/", "mainEntityOfPage": "https://myzles.github.io/guides/todo-list-in-cursor/", "datePublished": "2026-11-18", "dateModified": "2026-11-18", "author": {"@type": "Person", "name": "Myles"}, "publisher": {"@type": "Organization", "name": "Myzles", "url": "https://myzles.github.io/"}}, {"@type": "HowTo", "name": "How to see all TODOs in Cursor", "description": "List every TODO and FIXME in a Cursor project: workspace search with a regex, a linter rule, or a TODO extension installed from Open VSX or a .vsix file.", "step": [{"@type": "HowToStep", "position": 1, "name": "Search the workspace", "text": "Press Ctrl+Shift+F (Cmd+Shift+F on Mac), turn on regex and match case, and search for \\b(TODO|FIXME|HACK|BUG|XXX)\\b."}, {"@type": "HowToStep", "position": 2, "name": "Keep the list in a search editor", "text": "Run Search Editor: New Search Editor from the Command Palette to keep the results open as a tab."}, {"@type": "HowToStep", "position": 3, "name": "Turn on a linter TODO rule", "text": "Enable ESLint no-warning-comments, Pylint W0511 or Ruff's TD and FIX rules to see TODOs in the Problems panel."}, {"@type": "HowToStep", "position": 4, "name": "Install a TODO extension", "text": "Search the Extensions view (Open VSX), or download a .vsix and run Extensions: Install from VSIX."}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Cursor have a built-in TODO list?", "acceptedAnswer": {"@type": "Answer", "text": "No. Cursor is built on VS Code and has the same tools: workspace search, a search editor, and the Problems panel for linter warnings. A full tree of TODOs needs an extension."}}, {"@type": "Question", "name": "Why can't I find a VS Code extension in Cursor?", "acceptedAnswer": {"@type": "Answer", "text": "Cursor's Extensions view searches Open VSX, not Microsoft's Visual Studio Marketplace. Some extensions are only on one of them, or have an older version on Open VSX."}}, {"@type": "Question", "name": "How do I install a .vsix file in Cursor?", "acceptedAnswer": {"@type": "Answer", "text": "Open the Command Palette, run Extensions: Install from VSIX, and pick the file. You can also drag the .vsix onto the Extensions view."}}, {"@type": "Question", "name": "Can I ask Cursor's AI to find my TODOs?", "acceptedAnswer": {"@type": "Answer", "text": "You can, but it reads files into the chat, so on a large project it's slower and less complete than search. Search or an extension gives you every match, with clickable line links."}}]}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Guides</p>
+<h1>How to see all TODOs in Cursor</h1>
+<p>Cursor is built on VS Code, so everything that lists TODOs in VS Code works the same way in Cursor. The one difference is where extensions come from: Cursor's Extensions view searches <strong>Open VSX</strong>, not Microsoft's Visual Studio Marketplace. Here are four ways to get the list, starting with no setup at all.</p>
+
+<h2>1. Search the whole project</h2>
+<ol>
+<li>Press <code>Ctrl+Shift+F</code> (<code>Cmd+Shift+F</code> on Mac).</li>
+<li>Turn on regex (<code>.*</code>) and match case (<code>Ab</code>).</li>
+<li>Search for:
+<pre><code>\b(TODO|FIXME|HACK|BUG|XXX)\b</code></pre></li>
+<li>Under the three dots, add <code>node_modules, dist, build</code> to <strong>files to exclude</strong>. Files in <code>.gitignore</code> are skipped already.</li>
+</ol>
+<p>Search doesn't know what a comment is, so you'll also get strings like <code>status = "TODO"</code>. To keep only tags right after a comment marker, use:</p>
+<pre><code>(//|#|/\*|\*|--)\s*(TODO|FIXME|HACK|BUG|XXX)\b</code></pre>
+
+<h2>2. Keep the list open in a search editor</h2>
+<p>Run <strong>Search Editor: New Search Editor</strong> from the Command Palette (<code>Ctrl+Shift+P</code>), paste the regex, and you get the results as a normal tab you can save as a <code>.code-search</code> file and re-run later. From the terminal, <code>git grep -n -E "\b(TODO|FIXME)\b"</code> does the same.</p>
+
+<h2>3. Show TODOs in the Problems panel</h2>
+<p>Linters know what a comment is, so this is the cleanest built-in option:</p>
+<ul>
+<li><strong>ESLint:</strong> <code>"no-warning-comments": ["warn", {"terms": ["todo", "fixme"], "location": "start"}]</code></li>
+<li><strong>Pylint:</strong> the <code>fixme</code> check (W0511) is on by default. <strong>Ruff:</strong> enable the <code>TD</code> and <code>FIX</code> rules.</li>
+</ul>
+<p>Open the Problems panel with <code>Ctrl+Shift+M</code>. It mixes TODOs with other warnings and usually covers only files the linter has checked.</p>
+
+<h2>4. Install a TODO extension</h2>
+<p>An extension gives you a live tree of every tag, grouped by file. In Cursor there are two ways to install one:</p>
+<ul>
+<li><strong>From the Extensions view</strong> (<code>Ctrl+Shift+X</code>), if the extension is on Open VSX. Todo Tree is there, but Open VSX has version 0.0.215 (2022), older than the 0.0.226 on Microsoft's store. Better Todo Tree, a maintained fork, is on Open VSX at 1.3.4. Both use ripgrep under the hood.</li>
+<li><strong>From a .vsix file</strong>, if the publisher offers one. Run <strong>Extensions: Install from VSIX</strong> from the Command Palette and pick the file, or drag it onto the Extensions view. Extensions installed this way don't auto-update, so repeat it for new versions.</li>
+</ul>
+
+<h2>The tool I built</h2>
+<p><a href="https://go.myzles.workers.dev/todo-lens/site-seo">Todoscope</a> is my TODO extension. It has its own scanner instead of ripgrep, only counts tags inside real comments, and works the same in Cursor as in VS Code. The tree, highlights and filters are free; Pro adds git blame age, TODOs added on your branch and reports.</p>
+<p><strong>Installing it in Cursor today:</strong> Todoscope isn't on Open VSX yet. I've published it there and it's waiting on Open VSX's review, so for now it won't show up in Cursor's search. Until it does, open its <a href="https://go.myzles.workers.dev/todo-lens/site-seo">Marketplace page</a>, click <strong>Download Extension</strong> on the right, and install the .vsix with <strong>Extensions: Install from VSIX</strong>.</p>
+<p>On 95 public repos I hand-checked a sample of 45 lines that only Todo Tree's default pattern reported: about 9 in 10 were not real TODOs (things like <code>BUG("...")</code> calls and <code>TODO = "todo"</code> constants), and Todoscope skips those.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/todo-lens/site-seo">Get Todoscope</a></p>
+
+<h2>Which one to use</h2>
+<div class="tbl"><table>
+<tr><th></th><th>Search</th><th>Linter rule</th><th>Extension</th></tr>
+<tr><td>Setup</td><td>None</td><td>One config line</td><td>Install (Open VSX or .vsix)</td></tr>
+<tr><td>Only real comments</td><td>No</td><td>Yes</td><td>Depends on the extension</td></tr>
+<tr><td>Whole project</td><td>Yes</td><td>Usually linted files only</td><td>Yes</td></tr>
+<tr><td>Updates as you type</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+</table></div>
+
+<h2>FAQ</h2>
+<h3>Does Cursor have a built-in TODO list?</h3>
+<p>No. Cursor is built on VS Code and has the same tools: workspace search, a search editor, and the Problems panel for linter warnings. A full tree of TODOs needs an extension.</p>
+<h3>Why can&#x27;t I find a VS Code extension in Cursor?</h3>
+<p>Cursor&#x27;s Extensions view searches Open VSX, not Microsoft&#x27;s Visual Studio Marketplace. Some extensions are only on one of them, or have an older version on Open VSX.</p>
+<h3>How do I install a .vsix file in Cursor?</h3>
+<p>Open the Command Palette, run Extensions: Install from VSIX, and pick the file. You can also drag the .vsix onto the Extensions view.</p>
+<h3>Can I ask Cursor&#x27;s AI to find my TODOs?</h3>
+<p>You can, but it reads files into the chat, so on a large project it&#x27;s slower and less complete than search. Search or an extension gives you every match, with clickable line links.</p>
+<footer><p>Related guides: <a href="/guides/list-all-todos-vscode/">How to list all TODOs in VS Code</a> <a href="/alternatives/todo-tree/">Todo Tree alternative</a> <a href="/guides/todo-tree-not-working-vscode/">Todo Tree not working after a VS Code update</a></p><p>More: <a href="/products/">All Myzles tools and prices</a> <a href="/templates/">Free n8n and Make templates</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. Product names belong to their owners; we are not affiliated with them. Checked November 2026.</p></footer>
+</main></body></html>
