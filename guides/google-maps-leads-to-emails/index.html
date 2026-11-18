@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to get emails for a Google Maps lead list</title>
+<meta name="description" content="Google Maps exports have phones and websites but no emails. How to export a Maps lead list, use the website column, and find each business&#x27;s email.">
+<link rel="canonical" href="https://myzles.github.io/guides/google-maps-leads-to-emails/">
+<meta property="og:type" content="article"><meta property="og:title" content="How to get emails for a Google Maps lead list"><meta property="og:description" content="Google Maps exports have phones and websites but no emails. How to export a Maps lead list, use the website column, and find each business&#x27;s email."><meta property="og:url" content="https://myzles.github.io/guides/google-maps-leads-to-emails/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+pre{background:var(--soft);padding:10px 12px;border-radius:6px;overflow-x:auto;font-size:14px}pre code{background:none;padding:0}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "How to get emails for a Google Maps lead list", "description": "Google Maps exports have phones and websites but no emails. How to export a Maps lead list, use the website column, and find each business's email.", "url": "https://myzles.github.io/guides/google-maps-leads-to-emails/", "mainEntityOfPage": "https://myzles.github.io/guides/google-maps-leads-to-emails/", "datePublished": "2026-11-18", "dateModified": "2026-11-18", "author": {"@type": "Person", "name": "Myles"}, "publisher": {"@type": "Organization", "name": "Myzles", "url": "https://myzles.github.io/"}}, {"@type": "HowTo", "name": "How to get emails for a Google Maps lead list", "description": "Google Maps exports have phones and websites but no emails. How to export a Maps lead list, use the website column, and find each business's email.", "step": [{"@type": "HowToStep", "position": 1, "name": "Export the Maps results", "text": "Run a Google Maps scraper for your search and location and export the results with the website column."}, {"@type": "HowToStep", "position": 2, "name": "Clean the website column", "text": "Drop rows with no website, strip tracking and paths, and remove duplicate domains such as chains."}, {"@type": "HowToStep", "position": 3, "name": "Check each website for an email", "text": "Visit the homepage footer and the contact, about, team and imprint pages of each site."}, {"@type": "HowToStep", "position": 4, "name": "Join the emails back to the Maps rows", "text": "Match on domain so each place keeps its name, category, address and Maps link."}, {"@type": "HowToStep", "position": 5, "name": "Check domains take mail", "text": "Run an MX lookup and drop domains with no mail servers before you send anything."}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Google Maps show email addresses?", "acceptedAnswer": {"@type": "Answer", "text": "No. A Google Business Profile has a phone number and a website, but no email field, so every Maps scraper returns phones and websites at most. The email has to come from the business's own website."}}, {"@type": "Question", "name": "How do I get emails from Google Maps scraper results?", "acceptedAnswer": {"@type": "Answer", "text": "Take the website column from the export, remove empty and duplicate rows, then check each site's homepage and contact, about, team and imprint pages for an email. Join the results back to the Maps rows on domain."}}, {"@type": "Question", "name": "What about places with no website?", "acceptedAnswer": {"@type": "Answer", "text": "Roughly, the smaller the business the more likely it only has a Maps listing or a Facebook page. You can call the Maps phone number or message the Facebook page, but there is no website to read an email from."}}, {"@type": "Question", "name": "Is it legal to email businesses found on Google Maps?", "acceptedAnswer": {"@type": "Answer", "text": "Emailing a business's published address is common, but the rules depend on where they are: CAN-SPAM in the US, and GDPR and PECR in the EU and UK, which are stricter about emailing individuals."}}]}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Guides</p>
+<h1>How to get emails for a Google Maps lead list</h1>
+<p>Google Maps is one of the best sources of local business leads: every plumber, dentist and gym in a city, with a phone number, a website and reviews. What it never gives you is an email, because a Google Business Profile has no email field. Here's how to get from a Maps search to a list with emails, by hand or with a script.</p>
+
+<h2>1. Export the Maps results</h2>
+<p>Copying listings by hand works for 20 places. For more, use a Google Maps scraper (there are several on Apify, plus browser extensions and paid lead tools). Whichever you use, make sure the export includes:</p>
+<ul>
+<li><strong>Place name</strong> and <strong>category</strong></li>
+<li><strong>Website</strong>: this is the column the rest of this guide depends on</li>
+<li>Phone, address and the Maps link, so you can keep them next to the email later</li>
+</ul>
+<p>Search tip: Maps caps how many results one search shows, so split a big city into neighbourhoods or postcodes and run several searches rather than one.</p>
+
+<h2>2. Clean the website column</h2>
+<ul>
+<li><strong>Drop empty rows</strong> into a separate tab. Places with no website are phone-only leads.</li>
+<li><strong>Strip tracking.</strong> Maps websites often carry <code>?utm_source=gmb</code> or similar. Cut everything after the domain.</li>
+<li><strong>Dedupe on domain.</strong> Chains and franchises list the same website on every location, so 40 branches can collapse into one domain to check.</li>
+<li><strong>Flag non-websites.</strong> Some listings point to a Facebook page, Linktree or booking site instead of a real website. Those need a different approach.</li>
+</ul>
+<p>The same Sheets formula from the <a href="/guides/find-emails-from-a-list-of-websites/">list-of-websites guide</a> works here, with the website in A2:</p>
+<pre><code>=LOWER(REGEXEXTRACT(REGEXREPLACE(A2,"^https?://(www\.)?",""),"^[^/?#]+"))</code></pre>
+
+<h2>3. Find the email on each website</h2>
+<p>From here it's the same method as any list of websites. For each domain, check the homepage footer, then <code>/contact</code>, <code>/about</code>, <code>/team</code>, <code>/imprint</code> and <code>/privacy</code>. Search each page's source for <code>mailto:</code> and email patterns, drop junk such as image names and placeholders, and decode written-out addresses like <code>info [at] acme [dot] com</code>.</p>
+<p>Local businesses have two quirks worth knowing:</p>
+<ul>
+<li><strong>Free mailboxes are normal.</strong> Lots of tradespeople use a Gmail or Outlook address as their real business email. Don't filter those out by default.</li>
+<li><strong>Wix and similar builders</strong> are common for local firms, and their emails often only appear after JavaScript runs. A plain HTTP fetch sees nothing; a real browser does.</li>
+</ul>
+<p>The full walk-through, with a Google Sheets function and a Python script, is in <a href="/guides/find-emails-from-a-list-of-websites/">How to find emails from a list of websites</a>.</p>
+
+<h2>4. Join the emails back to the Maps rows</h2>
+<p>Keep the Maps data. A row with the business name, category, rating, address, phone and email is far more useful than a bare email. In Sheets, if your Maps tab has the domain in column B and your results tab has domain in A and email in B:</p>
+<pre><code>=IFERROR(VLOOKUP(B2, Results!A:B, 2, FALSE), "")</code></pre>
+<p>Because you deduped chains on domain, every branch picks up the same head-office email, which is usually what you want.</p>
+
+<h2>5. Check the domains take mail</h2>
+<pre><code>nslookup -type=mx acme.com</code></pre>
+<p>No MX records means mail will bounce, so remove those rows before importing into a cold email tool. MX records don't prove a mailbox exists; treat this as a filter, not verification.</p>
+
+<h2>The tool I built for this</h2>
+<p class="muted">Disclosure: I make and sell this tool.</p>
+<p><a href="https://go.myzles.workers.dev/contact-finder-apify/site-seo">Website Contact Finder</a> on Apify takes a Google Maps dataset directly. If you ran a Google Maps scraper on Apify, copy the dataset ID from that run's Storage tab and paste it into the <strong>Google Maps results (dataset ID)</strong> field. Every place with a website gets its emails, phones and social links, and each row keeps the place name, category, address and Maps link. Places without a website come back marked "No website listed".</p>
+<p>If your Maps list came from somewhere else (a CSV from another scraper or extension), paste the website column into the <strong>Websites</strong> field instead, one per line. Repeats are only checked once.</p>
+<p>It costs $4 per 1,000 websites where it finds contacts; websites with nothing found, places without a website and repeats are free. In my test on 1,186 real business websites, it found contacts on 90.6% of the sites it could reach.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/contact-finder-apify/site-seo">Try Website Contact Finder</a></p>
+<p>Want the owner's name rather than info@? <a href="https://go.myzles.workers.dev/decision-maker-finder/site-seo">Decision Maker Finder</a> reads the team and about pages of the same websites and returns names and titles.</p>
+
+<h2>FAQ</h2>
+<h3>Does Google Maps show email addresses?</h3>
+<p>No. A Google Business Profile has a phone number and a website, but no email field, so every Maps scraper returns phones and websites at most. The email has to come from the business&#x27;s own website.</p>
+<h3>How do I get emails from Google Maps scraper results?</h3>
+<p>Take the website column from the export, remove empty and duplicate rows, then check each site&#x27;s homepage and contact, about, team and imprint pages for an email. Join the results back to the Maps rows on domain.</p>
+<h3>What about places with no website?</h3>
+<p>Roughly, the smaller the business the more likely it only has a Maps listing or a Facebook page. You can call the Maps phone number or message the Facebook page, but there is no website to read an email from.</p>
+<h3>Is it legal to email businesses found on Google Maps?</h3>
+<p>Emailing a business&#x27;s published address is common, but the rules depend on where they are: CAN-SPAM in the US, and GDPR and PECR in the EU and UK, which are stricter about emailing individuals.</p>
+<footer><p>Related guides: <a href="/guides/find-emails-from-a-list-of-websites/">How to find emails from a list of websites</a> <a href="/guides/find-email-addresses-on-websites/">How to find email addresses on a website</a> <a href="/guides/find-decision-makers-at-a-company/">How to find decision makers at a company</a></p><p>More: <a href="/products/">All Myzles tools and prices</a> <a href="/templates/">Free n8n and Make templates</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. Product names belong to their owners; we are not affiliated with them. Checked November 2026.</p></footer>
+</main></body></html>
