@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to stop HubSpot imports creating duplicate contacts</title>
+<meta name="description" content="Stop HubSpot imports, forms and integrations from creating duplicate contacts: dedupe by email, record ID and domain, plus a monthly routine.">
+<link rel="canonical" href="https://myzles.github.io/guides/prevent-duplicate-contacts-hubspot-import/">
+<meta property="og:type" content="article"><meta property="og:title" content="How to stop HubSpot imports creating duplicate contacts"><meta property="og:description" content="Stop HubSpot imports, forms and integrations from creating duplicate contacts: dedupe by email, record ID and domain, plus a monthly routine."><meta property="og:url" content="https://myzles.github.io/guides/prevent-duplicate-contacts-hubspot-import/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to stop imports creating duplicate contacts in HubSpot", "description": "Stop HubSpot imports, forms and integrations from creating duplicate contacts: dedupe by email, record ID and domain, plus a monthly routine.", "mainEntityOfPage": "https://myzles.github.io/guides/prevent-duplicate-contacts-hubspot-import/", "datePublished": "2026-11-18", "dateModified": "2026-11-18", "author": {"@type": "Person", "name": "Myles"}, "publisher": {"@type": "Organization", "name": "Myzles (Swag Studios)"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How does HubSpot deduplicate contacts on import?", "acceptedAnswer": {"@type": "Answer", "text": "It matches contacts by email address or Record ID, and companies by company domain name or Record ID. Rows that match update the existing record."}}, {"@type": "Question", "name": "Why did my HubSpot import create duplicates?", "acceptedAnswer": {"@type": "Answer", "text": "Usually because rows had no email, a different email, or extra spaces, so HubSpot couldn't match them to the existing contact."}}, {"@type": "Question", "name": "Can I use Record ID to update contacts on import?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Keep the Record ID column from your HubSpot export and map it when you import the edited file back."}}, {"@type": "Question", "name": "How do I stop forms creating duplicate contacts?", "acceptedAnswer": {"@type": "Answer", "text": "Make email required, ask for a work email, and check that connected tools use a create-or-update action rather than create."}}, {"@type": "Question", "name": "How often should I check for duplicates?", "acceptedAnswer": {"@type": "Answer", "text": "A short monthly check of recently created contacts catches most of them before they spread into lists and reports."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; <a href="/products/">Guides</a></p>
+<h1>How to stop imports creating duplicate contacts in HubSpot</h1>
+<p>Most HubSpot duplicates don't come from people typing. They come from imports, forms and integrations creating a new record when one already exists. HubSpot has good built-in matching for imports, but only on a few fields. Once you know which fields, most duplicates are easy to prevent.</p>
+<p class="muted">Already have duplicates? See <a href="/guides/find-duplicate-contacts-hubspot/">how to find duplicate contacts in HubSpot</a> and <a href="/guides/merge-duplicate-contacts-hubspot-free/">how to merge them on the Free plan</a>.</p>
+
+<h2>How HubSpot decides an imported row already exists</h2>
+<div class="tbl"><table>
+<tr><th>Object</th><th>Matched on</th><th>What happens on a match</th></tr>
+<tr><td>Contacts</td><td>Email address, or Record ID</td><td>The existing contact is updated instead of a new one created</td></tr>
+<tr><td>Companies</td><td>Company domain name, or Record ID</td><td>The existing company is updated</td></tr>
+<tr><td>Any object</td><td>A custom property set to require unique values</td><td>The existing record is updated</td></tr>
+</table></div>
+<p>Anything else is not a match. A row with the right name but no email, or a different email, becomes a new contact. A company row with no domain becomes a new company, even if one with the same name exists.</p>
+
+<h2>Import checklist</h2>
+<ol>
+<li><strong>Include the email column, and map it to Email.</strong> This is the single biggest fix. Rows without an email can't be matched to anyone.</li>
+<li><strong>Clean emails first.</strong> Trim spaces, lower-case them and remove obvious junk like "n/a" or "none@none.com". A stray space can stop a match.</li>
+<li><strong>For updates, include Record ID.</strong> If you exported from HubSpot, edited in a spreadsheet and are importing back, keep the Record ID column and map it. It matches even if the email changed.</li>
+<li><strong>For companies, include a clean domain.</strong> Use the bare domain (acme.com), not www.acme.com, https://acme.com/ or a full URL with a path. Variants are a common source of duplicate companies.</li>
+<li><strong>Choose create-and-update on purpose.</strong> In the import options, decide whether rows should create new records, update existing ones, or both. "Update existing only" is the safest choice for enrichment files.</li>
+<li><strong>Test with 20 rows.</strong> Import a small sample, check that existing contacts were updated and not duplicated, then import the rest.</li>
+</ol>
+
+<h2>Company domains and automatic company creation</h2>
+<p>HubSpot can create and associate companies from contact email domains automatically (a setting under objects, companies). That's useful, but it's another source of duplicates when someone also imports companies by hand with a different domain format, or when a business uses more than one domain. Pick one source of truth for company records, and keep domains in the same bare format everywhere. For more on this, see <a href="/guides/find-duplicate-companies-hubspot/">how to find duplicate companies in HubSpot</a>.</p>
+
+<h2>Forms and integrations that create duplicates</h2>
+<ul>
+<li><strong>Forms with optional email.</strong> If email isn't required, HubSpot has nothing to match on. Make it required.</li>
+<li><strong>Same person, new email.</strong> Someone who fills in a form with a personal address after first using a work address usually becomes a second contact. Asking for a work email helps, and a regular scan catches the rest.</li>
+<li><strong>Integrations that "create" instead of "create or update".</strong> Zapier, Make, webinar tools and ad lead syncs often have both actions. Use the one that searches by email first.</li>
+<li><strong>CRM syncs.</strong> If you sync with another CRM, check its duplicate settings too. Two systems each creating records can double up quickly.</li>
+<li><strong>Manual entry.</strong> HubSpot warns about an existing email, but not about a similar name at the same company. Remind reps to search before they create.</li>
+</ul>
+
+<h2>A 10-minute monthly cleanup routine</h2>
+<ol>
+<li>Create a saved view of contacts created in the last 30 days, sorted by last name, with company and email domain as columns. Scan it for neighbours that look alike.</li>
+<li>Make a view of contacts with no email. Either add the email, or decide whether the record is worth keeping.</li>
+<li>Check your list of companies with no domain, and add one where you can.</li>
+<li>Merge the real duplicates (export the secondary records first, because merges can't be undone).</li>
+<li>Note which source created the duplicates (import, form, integration) and fix that source.</li>
+</ol>
+
+<h2>The tool I built (disclosure)</h2>
+<p>I make <a href="https://go.myzles.workers.dev/dupe-sweep/site-seo">Dupe Sweep</a>, a HubSpot app that scans contacts and companies, scores every possible match, pre-selects only the high-confidence ones and merges them in bulk, on any plan including Free. In my tests it fetched and scanned 4,659 contacts from a HubSpot test account in about 14 seconds, so a monthly scan takes less time than making a coffee. Real accounts are messier than test data, so it shows you every pair before anything is merged, and it keeps a log of the merged-away values. It can't undo a merge; nothing can. Free covers 25 merges a month; Pro is $9 a month.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/dupe-sweep-install/site-seo">Scan your HubSpot for free</a></p>
+<p class="muted">Want to compare first? See <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicate management on Free and Starter</a>.</p>
+
+<h2>FAQ</h2>
+<h3>How does HubSpot deduplicate contacts on import?</h3>
+<p>It matches contacts by email address or Record ID, and companies by company domain name or Record ID. Rows that match update the existing record.</p>
+<h3>Why did my HubSpot import create duplicates?</h3>
+<p>Usually because rows had no email, a different email, or extra spaces, so HubSpot couldn&#x27;t match them to the existing contact.</p>
+<h3>Can I use Record ID to update contacts on import?</h3>
+<p>Yes. Keep the Record ID column from your HubSpot export and map it when you import the edited file back.</p>
+<h3>How do I stop forms creating duplicate contacts?</h3>
+<p>Make email required, ask for a work email, and check that connected tools use a create-or-update action rather than create.</p>
+<h3>How often should I check for duplicates?</h3>
+<p>A short monthly check of recently created contacts catches most of them before they spread into lists and reports.</p>
+<footer><p>Related guides: <a href="/guides/find-duplicate-contacts-hubspot/">How to find duplicate contacts in HubSpot</a> <a href="/guides/merge-duplicate-contacts-hubspot-free/">How to merge duplicate contacts in HubSpot (Free plan)</a> <a href="/guides/find-duplicate-companies-hubspot/">How to find duplicate companies in HubSpot</a> <a href="/products/">All Myzles tools and prices</a></p><p>More: <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicates on Free and Starter</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. HubSpot is a trademark of HubSpot, Inc. This site and its tools are not made, endorsed or reviewed by HubSpot. Plans and menus change, so check HubSpot's own help pages for your account. Checked November 2026.</p></footer>
+</main></body></html>

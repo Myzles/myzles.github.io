@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to find duplicate companies in HubSpot</title>
+<meta name="description" content="Find duplicate companies in HubSpot: www and https domain variants, Inc/LLC/The name changes, parent and child records, and what native catches.">
+<link rel="canonical" href="https://myzles.github.io/guides/find-duplicate-companies-hubspot/">
+<meta property="og:type" content="article"><meta property="og:title" content="How to find duplicate companies in HubSpot"><meta property="og:description" content="Find duplicate companies in HubSpot: www and https domain variants, Inc/LLC/The name changes, parent and child records, and what native catches."><meta property="og:url" content="https://myzles.github.io/guides/find-duplicate-companies-hubspot/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to find duplicate companies in HubSpot", "description": "Find duplicate companies in HubSpot: www and https domain variants, Inc/LLC/The name changes, parent and child records, and what native catches.", "mainEntityOfPage": "https://myzles.github.io/guides/find-duplicate-companies-hubspot/", "datePublished": "2026-11-18", "dateModified": "2026-11-18", "author": {"@type": "Person", "name": "Myles"}, "publisher": {"@type": "Organization", "name": "Myzles (Swag Studios)"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I find duplicate companies in HubSpot?", "acceptedAnswer": {"@type": "Answer", "text": "Export companies, clean the domain (remove www, https and paths) and the name (remove Inc, LLC and The), then flag repeats. Or use HubSpot's duplicate tool on plans that include it."}}, {"@type": "Question", "name": "Does HubSpot deduplicate companies by domain?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Imports and automatic company creation match on the company domain name, so the same domain updates the existing company."}}, {"@type": "Question", "name": "Why do I have duplicate companies with the same name?", "acceptedAnswer": {"@type": "Answer", "text": "Usually one record has no domain or a domain in a different format, so HubSpot couldn't match it to the existing company."}}, {"@type": "Question", "name": "Should I merge parent and child companies?", "acceptedAnswer": {"@type": "Answer", "text": "No. Branches linked as child companies are separate on purpose. Merging them loses the structure."}}, {"@type": "Question", "name": "Can I undo a company merge in HubSpot?", "acceptedAnswer": {"@type": "Answer", "text": "No. Export the company you're merging away before you merge."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; <a href="/products/">Guides</a></p>
+<h1>How to find duplicate companies in HubSpot</h1>
+<p>Duplicate companies are sneakier than duplicate contacts. HubSpot matches companies on domain, so "acme.com" and "www.acme.com" can look like two businesses, and "Acme Inc" with no domain can sit next to "Acme" forever. Duplicate companies split deals, contacts and reporting, which is worse than a doubled email.</p>
+<p>Here's how to find them by hand, what HubSpot catches on its own, and what it tends to miss.</p>
+
+<h2>The usual causes</h2>
+<h3>Domain variants</h3>
+<p>The same company stored as <code>acme.com</code>, <code>www.acme.com</code>, <code>https://acme.com/</code>, <code>acme.com/contact</code> or <code>ACME.com</code>. These usually come from imports, enrichment tools and integrations that paste in a full website URL instead of the bare domain.</p>
+<h3>Name suffixes and "The"</h3>
+<p>"Acme", "Acme Inc", "Acme, Inc.", "Acme LLC" and "The Acme Company". When a record has no domain at all, the name is the only clue, and exact name matching misses all of these.</p>
+<h3>More than one real domain</h3>
+<p>acme.com and acme.co.uk, or a company that rebranded and kept its old domain. These may be duplicates, or deliberately separate regional records. Only someone who knows the business can say.</p>
+<h3>Parent and child companies</h3>
+<p>A head office and its branches can share a name and even a domain. HubSpot lets you link them as parent and child companies. Those aren't duplicates, and merging them loses the structure, so check before you merge.</p>
+
+<h2>Find them by hand (any plan)</h2>
+<ol>
+<li>Go to <strong>Companies</strong> and export with name, company domain name, website URL, city, country, owner and number of associated contacts.</li>
+<li>In a spreadsheet, add a <strong>clean domain</strong> column: lower-case, remove <code>https://</code>, <code>http://</code> and <code>www.</code>, and cut everything after the first <code>/</code>.</li>
+<li>Add a <strong>clean name</strong> column: lower-case, remove punctuation, a leading "the", and trailing words like inc, llc, ltd, co, corp, company, gmbh.</li>
+<li>Use <code>COUNTIF</code> on each clean column to flag repeats, then sort by clean name and scan the neighbours.</li>
+<li>Also filter for companies with <strong>no domain</strong>. That group holds most of the hidden duplicates.</li>
+<li>For each real duplicate, open the company you want to keep in HubSpot, click <strong>Actions</strong>, then <strong>Merge</strong>, and pick the other one. Export the record you're merging away first. Merges can't be undone.</li>
+</ol>
+<p>The same city and country help separate a real duplicate from two franchises with the same name.</p>
+
+<h2>What HubSpot's own tools catch and miss</h2>
+<p>HubSpot already prevents a lot of company duplicates: imports and automatic company creation match on the company domain name, so the exact same domain usually updates the existing company instead of creating a new one. On plans that include its duplicate management screen, it also suggests company pairs to review.</p>
+<p>Where it falls short is anything that isn't close to an exact match. In my testing, HubSpot's company suggestions were accurate when they appeared, but they missed a good share of duplicates with typos, "The" or suffix changes, or domain formatting differences. Records with no domain are the hardest case for any domain-based check. Bulk merge and custom rules need Data Hub Professional.</p>
+<div class="tbl"><table>
+<tr><th>Duplicate type</th><th>Domain-based check</th><th>Spreadsheet with clean columns</th></tr>
+<tr><td>Exact same domain</td><td>Usually caught</td><td>Caught</td></tr>
+<tr><td>www / https / path variants</td><td>Sometimes missed</td><td>Caught after cleaning</td></tr>
+<tr><td>Inc / LLC / "The" with no domain</td><td>Often missed</td><td>Caught after cleaning</td></tr>
+<tr><td>Typos in the name</td><td>Often missed</td><td>Mostly missed</td></tr>
+<tr><td>Parent and child companies</td><td>Should not merge</td><td>Needs a human</td></tr>
+</table></div>
+
+<h2>Stop new duplicates</h2>
+<ul>
+<li>Store domains in one bare format (acme.com) in every import and integration.</li>
+<li>Don't import companies without a domain unless you have to.</li>
+<li>Decide whether companies come from automatic creation or from imports, not both at full speed.</li>
+<li>Use parent and child links for branches instead of creating near-identical records.</li>
+</ul>
+<p class="muted">For contacts, see <a href="/guides/find-duplicate-contacts-hubspot/">how to find duplicate contacts in HubSpot</a> and <a href="/guides/prevent-duplicate-contacts-hubspot-import/">how to stop imports creating duplicates</a>.</p>
+
+<h2>The tool I built (disclosure)</h2>
+<p>I make <a href="https://go.myzles.workers.dev/dupe-sweep/site-seo">Dupe Sweep</a>, a HubSpot app that scans contacts and companies, scores every possible match, pre-selects only the high-confidence ones and merges them in bulk, on any plan including Free. On seeded test data in a HubSpot developer account, its high-confidence tier found about 94% of the duplicate companies, against about 78% found by HubSpot's own suggestions on the same data. Real accounts are messier than test data, so it shows you every pair before anything is merged, and it keeps a log of the merged-away values. It can't undo a merge; nothing can. Free covers 25 merges a month; Pro is $9 a month.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/dupe-sweep-install/site-seo">Scan your HubSpot for free</a></p>
+<p class="muted">Want to compare first? See <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicate management on Free and Starter</a>.</p>
+
+<h2>FAQ</h2>
+<h3>How do I find duplicate companies in HubSpot?</h3>
+<p>Export companies, clean the domain (remove www, https and paths) and the name (remove Inc, LLC and The), then flag repeats. Or use HubSpot&#x27;s duplicate tool on plans that include it.</p>
+<h3>Does HubSpot deduplicate companies by domain?</h3>
+<p>Yes. Imports and automatic company creation match on the company domain name, so the same domain updates the existing company.</p>
+<h3>Why do I have duplicate companies with the same name?</h3>
+<p>Usually one record has no domain or a domain in a different format, so HubSpot couldn&#x27;t match it to the existing company.</p>
+<h3>Should I merge parent and child companies?</h3>
+<p>No. Branches linked as child companies are separate on purpose. Merging them loses the structure.</p>
+<h3>Can I undo a company merge in HubSpot?</h3>
+<p>No. Export the company you&#x27;re merging away before you merge.</p>
+<footer><p>Related guides: <a href="/guides/find-duplicate-contacts-hubspot/">How to find duplicate contacts in HubSpot</a> <a href="/guides/merge-duplicate-contacts-hubspot-free/">How to merge duplicate contacts in HubSpot (Free plan)</a> <a href="/guides/prevent-duplicate-contacts-hubspot-import/">How to stop imports creating duplicate contacts in HubSpot</a> <a href="/products/">All Myzles tools and prices</a></p><p>More: <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicates on Free and Starter</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. HubSpot is a trademark of HubSpot, Inc. This site and its tools are not made, endorsed or reviewed by HubSpot. Plans and menus change, so check HubSpot's own help pages for your account. Checked November 2026.</p></footer>
+</main></body></html>

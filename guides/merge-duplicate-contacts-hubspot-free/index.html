@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to merge duplicate contacts in HubSpot on the Free plan</title>
+<meta name="description" content="Merge duplicate HubSpot contacts on the Free plan, one pair at a time: the steps, what a merge keeps and loses, and why to export first.">
+<link rel="canonical" href="https://myzles.github.io/guides/merge-duplicate-contacts-hubspot-free/">
+<meta property="og:type" content="article"><meta property="og:title" content="How to merge duplicate contacts in HubSpot on the Free plan"><meta property="og:description" content="Merge duplicate HubSpot contacts on the Free plan, one pair at a time: the steps, what a merge keeps and loses, and why to export first."><meta property="og:url" content="https://myzles.github.io/guides/merge-duplicate-contacts-hubspot-free/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to merge duplicate contacts in HubSpot on the Free plan", "description": "Merge duplicate HubSpot contacts on the Free plan, one pair at a time: the steps, what a merge keeps and loses, and why to export first.", "mainEntityOfPage": "https://myzles.github.io/guides/merge-duplicate-contacts-hubspot-free/", "datePublished": "2026-11-18", "dateModified": "2026-11-18", "author": {"@type": "Person", "name": "Myles"}, "publisher": {"@type": "Organization", "name": "Myzles (Swag Studios)"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can you merge contacts on HubSpot's Free plan?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Open the contact you want to keep, click Actions, then Merge, and choose the duplicate. It works one pair at a time."}}, {"@type": "Question", "name": "Can I undo a merge in HubSpot?", "acceptedAnswer": {"@type": "Answer", "text": "No. A merge can't be reversed, so export the secondary record (all properties) before you merge."}}, {"@type": "Question", "name": "Which contact should be the primary?", "acceptedAnswer": {"@type": "Answer", "text": "Usually the older record, the one with the most activity, or the one with the right owner and lifecycle stage. Its values win where both records have one."}}, {"@type": "Question", "name": "Does merging keep emails and notes from both contacts?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The timeline activity and associations from both records end up on the merged contact."}}, {"@type": "Question", "name": "How do I bulk merge duplicates in HubSpot?", "acceptedAnswer": {"@type": "Answer", "text": "Bulk merge is part of Data Hub Professional. On Free and Starter you merge one pair at a time or use a Marketplace app."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; <a href="/products/">Guides</a></p>
+<h1>How to merge duplicate contacts in HubSpot on the Free plan</h1>
+<p>On HubSpot's Free plan you can merge duplicate contacts, but only one pair at a time, from the contact record. There's no bulk merge button. That's fine for a handful of duplicates and slow for a few hundred. Here's the whole method, plus what to save before you start, because a merge can't be reversed.</p>
+<p class="muted">Haven't found your duplicates yet? Start with <a href="/guides/find-duplicate-contacts-hubspot/">how to find duplicate contacts in HubSpot</a>.</p>
+
+<h2>Before you merge: export the record you'll lose</h2>
+<p>Every merge has a primary record (the one that survives) and a secondary record (the one that's folded in). HubSpot can't split them apart again, so take a copy first.</p>
+<ol>
+<li>Go to <strong>Contacts</strong> and filter or search to the duplicates you plan to merge. A saved view such as "Possible duplicates" makes this repeatable.</li>
+<li>Click <strong>Export</strong>, choose <strong>All properties</strong> (not just the visible columns), and download the file.</li>
+<li>Keep that file somewhere safe and name it with the date. If a merge goes wrong, it's the only place the secondary's old values live in one piece.</li>
+</ol>
+<p>For one or two merges, a screenshot of the secondary record's left sidebar is enough. For anything bigger, export.</p>
+
+<h2>How to merge two contacts, step by step</h2>
+<ol>
+<li>Open the contact you want to <strong>keep</strong>. Usually that's the older record, the one with the most activity, or the one your sales team already works from.</li>
+<li>At the top of the left sidebar, click <strong>Actions</strong>, then <strong>Merge</strong>.</li>
+<li>In the dialog, search for the duplicate by name or email and select it.</li>
+<li>Check which record HubSpot marks as primary. You can switch it in the dialog. The primary is the one that survives.</li>
+<li>Click <strong>Merge</strong>. The secondary disappears and its activity moves onto the primary.</li>
+</ol>
+<p>Repeat for each pair. If one person has three records, merge two of them, then merge the third into the result.</p>
+
+<h2>What a merge keeps and what it loses</h2>
+<p>HubSpot's exact rules vary by property and object, and they do change, so read HubSpot's own article on merging records for your account. In general:</p>
+<ul>
+<li><strong>Kept:</strong> the timeline from both records (emails, calls, notes, meetings, form submissions), and associations to companies, deals and tickets from both.</li>
+<li><strong>Kept as a second address:</strong> the secondary's email address is usually added to the merged contact as an additional email, so future emails to either address land on one record.</li>
+<li><strong>Primary wins:</strong> where both records have a value in the same field, the primary's value is normally the one you see. Blank fields can be filled from the secondary.</li>
+<li><strong>Lost or hard to get back:</strong> the secondary's conflicting values (a different job title, phone or owner), its separate record ID, and any list or workflow logic that depended on it being a separate contact.</li>
+<li><strong>Changed:</strong> the merged record can end up with a new record ID. Bookmarks, spreadsheets or integrations that store the old ID may stop matching.</li>
+</ul>
+<p>That last group is why the export matters. If the secondary had the right phone number and the primary had an old one, you want a copy to fix it by hand.</p>
+
+<h2>Tips that save time</h2>
+<ul>
+<li>Pick the primary on purpose. The record with the right owner, lifecycle stage and email preferences saves you clean-up afterwards.</li>
+<li>Check subscription status. If one record unsubscribed, think about what the merged contact should be allowed to receive.</li>
+<li>Work in batches of 20 or so, then check your export against the results before moving on.</li>
+<li>Look out for coworkers, not duplicates. Two people at the same company with the same last name, or a shared inbox like info@, are not the same person.</li>
+</ul>
+
+<h2>Why there's no bulk merge on Free</h2>
+<p>HubSpot puts its duplicate management tools for bulk work (bulk merge and custom duplicate rules) in Data Hub Professional and above. On Free and Starter, the built-in route is the one-by-one merge above. If you have a few dozen duplicates, that's an afternoon. If you have hundreds, people usually either upgrade or use a Marketplace app.</p>
+
+<h2>The tool I built (disclosure)</h2>
+<p>I make <a href="https://go.myzles.workers.dev/dupe-sweep/site-seo">Dupe Sweep</a>, a HubSpot app that scans contacts and companies, scores every possible match, pre-selects only the high-confidence ones and merges them in bulk, on any plan including Free. In a live test on seeded test data in a HubSpot developer account, it made 1,061 merges with zero wrong merges. Real accounts are messier than test data, so it shows you every pair before anything is merged, and it keeps a log of the merged-away values. It can't undo a merge; nothing can. Free covers 25 merges a month; Pro is $9 a month.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/dupe-sweep-install/site-seo">Scan your HubSpot for free</a></p>
+<p class="muted">Want to compare first? See <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicate management on Free and Starter</a>.</p>
+
+<h2>FAQ</h2>
+<h3>Can you merge contacts on HubSpot&#x27;s Free plan?</h3>
+<p>Yes. Open the contact you want to keep, click Actions, then Merge, and choose the duplicate. It works one pair at a time.</p>
+<h3>Can I undo a merge in HubSpot?</h3>
+<p>No. A merge can&#x27;t be reversed, so export the secondary record (all properties) before you merge.</p>
+<h3>Which contact should be the primary?</h3>
+<p>Usually the older record, the one with the most activity, or the one with the right owner and lifecycle stage. Its values win where both records have one.</p>
+<h3>Does merging keep emails and notes from both contacts?</h3>
+<p>Yes. The timeline activity and associations from both records end up on the merged contact.</p>
+<h3>How do I bulk merge duplicates in HubSpot?</h3>
+<p>Bulk merge is part of Data Hub Professional. On Free and Starter you merge one pair at a time or use a Marketplace app.</p>
+<footer><p>Related guides: <a href="/guides/find-duplicate-contacts-hubspot/">How to find duplicate contacts in HubSpot</a> <a href="/guides/prevent-duplicate-contacts-hubspot-import/">How to stop imports creating duplicate contacts in HubSpot</a> <a href="/guides/find-duplicate-companies-hubspot/">How to find duplicate companies in HubSpot</a> <a href="/products/">All Myzles tools and prices</a></p><p>More: <a href="/alternatives/hubspot-duplicate-management/">HubSpot duplicates on Free and Starter</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. HubSpot is a trademark of HubSpot, Inc. This site and its tools are not made, endorsed or reviewed by HubSpot. Plans and menus change, so check HubSpot's own help pages for your account. Checked November 2026.</p></footer>
+</main></body></html>
