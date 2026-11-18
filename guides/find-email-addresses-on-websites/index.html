@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to find email addresses on a website (even hidden ones)</title>
+<meta name="description" content="Where companies put their email addresses, how to read obfuscated and Cloudflare-hidden ones, how to check a domain takes mail, and bulk options.">
+<link rel="canonical" href="https://myzles.github.io/guides/find-email-addresses-on-websites/">
+<meta property="og:type" content="article"><meta property="og:title" content="How to find email addresses on a website (even hidden ones)"><meta property="og:description" content="Where companies put their email addresses, how to read obfuscated and Cloudflare-hidden ones, how to check a domain takes mail, and bulk options."><meta property="og:url" content="https://myzles.github.io/guides/find-email-addresses-on-websites/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+pre{background:var(--soft);padding:10px 12px;border-radius:6px;overflow-x:auto;font-size:14px}pre code{background:none;padding:0}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "How to find email addresses on a website", "description": "Where companies put their email addresses, how to read obfuscated and Cloudflare-hidden ones, how to check a domain takes mail, and bulk options.", "url": "https://myzles.github.io/guides/find-email-addresses-on-websites/", "mainEntityOfPage": "https://myzles.github.io/guides/find-email-addresses-on-websites/", "datePublished": "2026-11-18", "dateModified": "2026-11-18", "author": {"@type": "Person", "name": "Myles"}, "publisher": {"@type": "Organization", "name": "Myzles", "url": "https://myzles.github.io/"}}, {"@type": "HowTo", "name": "How to find email addresses on a website", "description": "Where companies put their email addresses, how to read obfuscated and Cloudflare-hidden ones, how to check a domain takes mail, and bulk options.", "step": [{"@type": "HowToStep", "position": 1, "name": "Check the obvious pages", "text": "Look at the contact, about, team, imprint and privacy pages, plus the footer."}, {"@type": "HowToStep", "position": 2, "name": "Search the page source", "text": "Press Ctrl+U and search for mailto: and @ to find addresses that aren't visible."}, {"@type": "HowToStep", "position": 3, "name": "Decode obfuscated addresses", "text": "Turn 'name [at] domain [dot] com' back into an address, and click Cloudflare's [email protected] links to reveal them."}, {"@type": "HowToStep", "position": 4, "name": "Check the domain accepts mail", "text": "Run nslookup -type=mx on the domain to see if it has mail servers."}, {"@type": "HowToStep", "position": 5, "name": "Do it in bulk", "text": "For more than a handful of sites, use a scraper that visits each site's contact pages for you."}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I find a hidden email address on a website?", "acceptedAnswer": {"@type": "Answer", "text": "View the page source with Ctrl+U and search for mailto: and @. If the page shows [email protected], it's Cloudflare's protection: click it in a normal browser to reveal the address."}}, {"@type": "Question", "name": "How do I check if an email domain is real?", "acceptedAnswer": {"@type": "Answer", "text": "Run nslookup -type=mx on the domain. If it lists mail servers, the domain accepts email. That doesn't prove a specific mailbox exists."}}, {"@type": "Question", "name": "Is it legal to collect emails from websites?", "acceptedAnswer": {"@type": "Answer", "text": "Collecting a business's published contact address is common, but how you use it is regulated: CAN-SPAM in the US, and GDPR and PECR in the EU and UK, which are stricter about emailing individuals."}}, {"@type": "Question", "name": "Why can't I find an email on a company website?", "acceptedAnswer": {"@type": "Answer", "text": "Many small businesses only publish a contact form. Check the imprint, privacy page and their social profiles, or use the form."}}]}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; Guides</p>
+<h1>How to find email addresses on a website</h1>
+<p>Most companies publish at least one email address. It's just rarely on the homepage. Here's where to look, how to read the addresses sites try to hide from bots, and what to do when you have a list of 500 websites instead of five.</p>
+
+<h2>1. Check the pages where emails usually live</h2>
+<p>Try these, in this order. Add them straight to the domain if there's no menu link:</p>
+<ul>
+<li><code>/contact</code>, <code>/contact-us</code>: the obvious one. Often just a form, but scroll to the bottom.</li>
+<li><strong>The footer</strong> of any page.</li>
+<li><code>/about</code>, <code>/team</code>, <code>/our-people</code>: small firms list each person with their own address.</li>
+<li><code>/impressum</code> or <code>/imprint</code>: German and Austrian businesses are legally required to publish one, and it almost always has an email.</li>
+<li><code>/privacy</code>: privacy policies usually name a contact for data requests, often a real inbox.</li>
+<li><code>/careers</code>, <code>/press</code>: separate jobs@ and press@ addresses.</li>
+</ul>
+
+<h2>2. Search the page source</h2>
+<p>Some addresses sit behind a "Email us" button or icon and never show up as text.</p>
+<ol>
+<li>Press <code>Ctrl+U</code> (or right-click, View page source).</li>
+<li>Press <code>Ctrl+F</code> and search for <code>mailto:</code>. Every hit is a clickable email link.</li>
+<li>Search for <code>@</code> and the domain name too. Ignore addresses like <code>name@2x.png</code> (image files) and ones on tracking or font domains.</li>
+</ol>
+<p>If the page is built with JavaScript, View source can come back almost empty. Open DevTools (<code>F12</code>), go to the Elements tab and search there instead: it shows the page after scripts have run.</p>
+
+<h2>3. Decode hidden and obfuscated addresses</h2>
+<ul>
+<li><strong>Written out:</strong> <code>sales [at] example [dot] com</code> or <code>sales(at)example.com</code>. Swap the words back for <code>@</code> and <code>.</code>.</li>
+<li><strong>Cloudflare email protection:</strong> the page shows <code>[email&#160;protected]</code>. Clicking it in a normal browser reveals the address. In the source it's a <code>data-cfemail</code> value: the first two hex characters are a key, and each following pair XOR'd with that key gives one character.</li>
+<li><strong>HTML entities:</strong> <code>&amp;#115;&amp;#97;...</code> looks like noise in the source but renders as a normal address on the page, so read it on the page.</li>
+<li><strong>Images:</strong> some sites show the address as a picture. You'll have to type it out.</li>
+</ul>
+
+<h2>4. When there's no email anywhere</h2>
+<p>About a third of small business sites only have a contact form. Your options:</p>
+<ul>
+<li>Use the form. It's what they want you to do.</li>
+<li>Check the company's LinkedIn, Facebook or Google Business profile, which sometimes list an email the site doesn't.</li>
+<li>Guess the common patterns (<code>info@</code>, <code>hello@</code>, <code>firstname@</code>), knowing that a guess isn't an address.</li>
+</ul>
+<p>Before you guess, check the domain can receive email at all:</p>
+<pre><code>nslookup -type=mx example.com</code></pre>
+<p>If it lists mail servers, the domain takes email. That doesn't tell you whether a particular mailbox exists, and many servers accept everything and bounce later. WHOIS records rarely help any more: since GDPR most of them are redacted.</p>
+<p>Whatever you find, follow the rules where you send. In the US, CAN-SPAM requires a real address and an opt-out in commercial email. In the EU and UK, cold emailing individuals has stricter rules than emailing a generic company inbox.</p>
+
+<h2>5. Doing it for a list of websites</h2>
+<p>Steps 1 to 3 take two or three minutes a site. For 20 sites that's an hour. For 500, use a tool that visits the contact pages for you. Watch for ones that charge per page crawled (a site with ten pages costs ten times as much), and ones that return junk like <code>example@domain.com</code> or image filenames.</p>
+
+<h2>The tools I built</h2>
+<p>I built <a href="https://go.myzles.workers.dev/contact-finder-apify/site-seo">Website Contact Finder</a> on Apify for lists. You paste websites and get one row per company with emails, phones, social links and the contact page, best email first. It costs $4 per 1,000 websites where it finds contacts, and sites where it finds nothing are free.</p>
+<p>In my test on 1,186 real business websites, it found contacts on 90.6% of the sites it could reach.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/contact-finder-apify/site-seo">Try Website Contact Finder</a></p>
+<p>For one site at a time while you browse, there's the <a href="https://go.myzles.workers.dev/contact-finder-ext/site-seo">Contact Finder extension for Edge</a>: one click on a company site, no account, 10 free lookups a day.</p>
+<p class="muted">Comparing tools? See <a href="/alternatives/hunter-io/">Hunter alternative</a> and <a href="/alternatives/apify-contact-details-scraper/">Contact Details Scraper pricing</a>.</p>
+
+<h2>FAQ</h2>
+<h3>How do I find a hidden email address on a website?</h3>
+<p>View the page source with Ctrl+U and search for mailto: and @. If the page shows [email protected], it&#x27;s Cloudflare&#x27;s protection: click it in a normal browser to reveal the address.</p>
+<h3>How do I check if an email domain is real?</h3>
+<p>Run nslookup -type=mx on the domain. If it lists mail servers, the domain accepts email. That doesn&#x27;t prove a specific mailbox exists.</p>
+<h3>Is it legal to collect emails from websites?</h3>
+<p>Collecting a business&#x27;s published contact address is common, but how you use it is regulated: CAN-SPAM in the US, and GDPR and PECR in the EU and UK, which are stricter about emailing individuals.</p>
+<h3>Why can&#x27;t I find an email on a company website?</h3>
+<p>Many small businesses only publish a contact form. Check the imprint, privacy page and their social profiles, or use the form.</p>
+<footer><p>Related guides: <a href="/guides/find-decision-makers-at-a-company/">How to find decision makers at a company</a> <a href="/guides/find-companies-that-are-hiring/">How to find companies that are hiring</a></p><p>More: <a href="/products/">All Myzles tools and prices</a> <a href="/templates/">Free n8n and Make templates</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. Product names belong to their owners; we are not affiliated with them. Checked November 2026.</p></footer>
+</main></body></html>
