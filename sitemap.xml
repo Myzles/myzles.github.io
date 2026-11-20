@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://myzles.github.io/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://myzles.github.io/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://myzles.github.io/guides/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://myzles.github.io/mermaid-diagrams/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://myzles.github.io/local-link-checker/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://myzles.github.io/holdup-jira/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://myzles.github.io/sheet-reports/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://myzles.github.io/products/</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://myzles.github.io/alternatives/todo-tree/</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://myzles.github.io/alternatives/hunter-io/</loc><lastmod>2026-11-18</lastmod></url>
