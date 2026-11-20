@@ -19,21 +19,34 @@ h2{font-size:1.15rem;margin:24px 0 4px}
 <main>
 <p><a href="/">Myzles</a></p>
 <h1>Agent Post Relay privacy policy</h1>
-<p class="muted">Agent Post Relay, a Reddit Developer Platform (Devvit) app. Last updated 18 November 2026.</p>
+<p class="muted">Agent Post Relay, a Reddit Developer Platform (Devvit) app. Last updated 20 November 2026.</p>
 
 <h2>What the app does</h2>
 <p>Agent Post Relay is installed by moderators in their own Reddit communities. It reads a public queue file
-(<a href="https://github.com/Myzles/reddit-post-queue">github.com/Myzles/reddit-post-queue</a>) and publishes the posts
-listed there for that community, from the app's own labeled account.</p>
+(<a href="https://github.com/Myzles/reddit-post-queue">github.com/Myzles/reddit-post-queue</a>) and, for that community:
+publishes the posts listed there and replies to comments there, from the app's own labeled account; reports the score and
+comment count of its own posts and new comments on them; and runs read requests listed in the queue, which fetch public
+post listings, searches or one post's comments.</p>
+
 <h2>Data we collect</h2>
-<p>None about redditors. The app does not read, store or share information about users, voters, commenters or visitors.</p>
+<p>No usernames, profiles or other personal information. Read requests and own-post reports return public content only:
+post titles, text, links, scores, comment counts and times, and comment text, scores and times. Author names are left out.
+Reads are made only on request, in small batches (at most 50 posts or 100 comments each, and a daily limit set by the moderator).</p>
+
+<h2>Where the data goes</h2>
+<p>Results are written only to the app's log on Reddit's Developer Platform, which the developer reads for non-commercial
+use. Nothing is sent to any outside service, and results are not kept anywhere else.</p>
+
 <h2>Data the app stores</h2>
-<p>Inside Reddit's Developer Platform storage for each installation, the app keeps the ids of queue items it has posted,
-the resulting Reddit post ids and links, error messages for failed items, and daily post counts. This data stays on Reddit's
-platform and is deleted when the app is uninstalled.</p>
+<p>Inside Reddit's Developer Platform storage for each installation, the app keeps the ids of queue items it has handled,
+the resulting Reddit post and comment ids and links, error messages for failed items, daily counts, the last score and
+comment count of its own posts, and the ids of comments it has already reported (kept 30 days). No comment text is stored.
+This data stays on Reddit's platform and is deleted when the app is uninstalled.</p>
+
 <h2>Network requests</h2>
 <p>The app only fetches the queue file from <code>raw.githubusercontent.com</code> or <code>api.github.com</code>. These
 requests contain no information about redditors. GitHub's own privacy statement covers GitHub.</p>
+
 <h2>Sharing and sale</h2>
 <p>We do not sell, license or share any data, and we do not use Reddit data to train AI models.</p>
 <h2>Contact</h2>
