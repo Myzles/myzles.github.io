@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why HubSpot duplicates keep coming back after a cleanup (and how to find the source)</title>
+<meta name="description" content="Merged your HubSpot duplicates and they came back? Find which form, import or integration creates them using record source and create date, then fix that source.">
+<link rel="canonical" href="https://myzles.github.io/guides/hubspot-duplicates-keep-coming-back/">
+<meta property="og:type" content="article"><meta property="og:title" content="Why HubSpot duplicates keep coming back after a cleanup (and how to find the source)"><meta property="og:description" content="Merged your HubSpot duplicates and they came back? Find which form, import or integration creates them using record source and create date, then fix that source."><meta property="og:url" content="https://myzles.github.io/guides/hubspot-duplicates-keep-coming-back/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Why HubSpot duplicates keep coming back after a cleanup (and how to find the source)", "description": "Merged your HubSpot duplicates and they came back? Find which form, import or integration creates them using record source and create date, then fix that source.", "mainEntityOfPage": "https://myzles.github.io/guides/hubspot-duplicates-keep-coming-back/", "datePublished": "2026-11-25", "dateModified": "2026-11-25", "author": {"@type": "Person", "name": "Myles"}, "publisher": {"@type": "Organization", "name": "Myzles (Swag Studios)"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why do HubSpot duplicates come back after I merge them?", "acceptedAnswer": {"@type": "Answer", "text": "Because merging fixes records, not sources. An import, form or integration that creates new contacts without matching on email will keep making duplicates until it is changed."}}, {"@type": "Question", "name": "How do I see what created a HubSpot contact?", "acceptedAnswer": {"@type": "Answer", "text": "Add the Record source and Record source detail properties as columns in a contact view. They show whether a record came from an import, form, integration, sales rep or app."}}, {"@type": "Question", "name": "Do Zapier and Make create duplicate HubSpot contacts?", "acceptedAnswer": {"@type": "Answer", "text": "They can, when the step uses a plain create action. Use a find-or-create or create-or-update action that searches by email first."}}, {"@type": "Question", "name": "Does HubSpot merge contacts with different emails automatically?", "acceptedAnswer": {"@type": "Answer", "text": "No. HubSpot matches on email address, so the same person with two addresses stays as two contacts until someone finds and merges them."}}, {"@type": "Question", "name": "How often should I check for new duplicates?", "acceptedAnswer": {"@type": "Answer", "text": "Monthly is enough for most teams: look at contacts created in the last 30 days and merge the real pairs before they reach lists and reports."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; <a href="/guides/">Guides</a></p>
+<h1>Why HubSpot duplicates keep coming back after a cleanup (and how to find the source)</h1>
+<p>A common story in HubSpot admin threads: someone spends a week merging duplicates, the database looks clean, and three months later it's just as bad. The merge wasn't wrong. Something upstream is still creating new records, and until you find it, every cleanup is temporary.</p>
+<p>This guide shows how to find which source is making the duplicates, using properties every HubSpot account already has, and what to change once you know.</p>
+
+<h2>Step 1: Collect a sample of fresh duplicates</h2>
+<p>Don't start with the old mess. Look only at duplicates created after your last cleanup, because those point at the source that's still running.</p>
+<ol>
+<li>Make a contact view filtered to <strong>Create date</strong> is after your last cleanup.</li>
+<li>Add the columns <strong>Email</strong>, <strong>Company name</strong>, <strong>Record source</strong>, <strong>Record source detail 1</strong>, <strong>Original traffic source</strong> and <strong>Create date</strong>.</li>
+<li>Sort by last name, then by company, and note 15 to 20 pairs that are clearly the same person.</li>
+</ol>
+<p class="muted">Property names change from time to time, so if one isn't there, search the column picker for "source".</p>
+
+<h2>Step 2: Read the source on the newer record of each pair</h2>
+<p>For each pair, the older record is usually fine. The newer one tells you what created the duplicate. Tally them up:</p>
+<div class="tbl"><table>
+<tr><th>Newer record's source looks like</th><th>Likely cause</th><th>Fix</th></tr>
+<tr><td>Import</td><td>Rows with no email or a different email, so HubSpot couldn't match them</td><td>Always map Email, keep Record ID for re-imports, test 20 rows first</td></tr>
+<tr><td>Form, same person with a new email</td><td>Someone switched from a work to a personal address, or the reverse</td><td>Ask for a work email; scan regularly for same name plus same company</td></tr>
+<tr><td>Integration (Zapier, Make, webinar or ad lead sync)</td><td>The step uses "create contact" instead of "find or create"</td><td>Switch the action to search by email first, then create only if nothing is found</td></tr>
+<tr><td>CRM or app sync</td><td>Two systems both creating records, each with slightly different data</td><td>Choose one system to create records and set the other to update only</td></tr>
+<tr><td>Sales rep or manual entry</td><td>Contact created without searching first, or with a typo in the email</td><td>Search first habit; HubSpot warns on an exact email match only</td></tr>
+<tr><td>Company records, created automatically</td><td>Company domains in different formats, or a business with two domains</td><td>One source of truth for companies; bare domains everywhere</td></tr>
+</table></div>
+<p>In most accounts one or two sources cause nearly all of the duplicates. Fix those first.</p>
+
+<h2>Step 3: Fix the source, then clean once more</h2>
+<ul>
+<li><strong>Integrations:</strong> open each zap or scenario that touches HubSpot contacts and check the action name. "Create or update" and "find contact, then create" are fine. Plain "create" is the usual culprit.</li>
+<li><strong>Imports:</strong> write a one-paragraph import rule for your team: email column mapped, emails trimmed, Record ID kept on re-imports. See <a href="/guides/prevent-duplicate-contacts-hubspot-import/">how to stop imports creating duplicates</a>.</li>
+<li><strong>Forms:</strong> make email required and avoid hidden fields that overwrite email.</li>
+<li><strong>Different emails, same person:</strong> HubSpot's own matching keys on email, so these never match automatically. You need a name plus company or phone check. See <a href="/guides/hubspot-duplicate-contacts-different-emails/">finding duplicates with different emails</a>.</li>
+</ul>
+<p>Only after the sources are fixed is it worth doing a full merge pass. Then keep a short monthly check of contacts created in the last 30 days, so anything new is caught before it spreads into lists and reports.</p>
+
+<h2>The tool I built (disclosure)</h2>
+<p>I make <a href="https://go.myzles.workers.dev/dupe-sweep/site-seo">Dupe Sweep</a>, a HubSpot app for exactly that monthly check. It scans contacts and companies, matches on email, name plus company, phone and domain (so it catches the different-email cases), scores each pair, and merges the ones you approve in bulk, on any HubSpot plan including Free. In my tests it scanned 4,659 contacts in about 14 seconds. It shows every pair before anything is merged and keeps a log of merged-away values, but a merge can't be undone, so review the list. Free covers 25 merges a month; Pro is $9 a month.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/dupe-sweep-install/site-seo">Scan your HubSpot for free</a></p>
+
+<h2>FAQ</h2>
+<h3>Why do HubSpot duplicates come back after I merge them?</h3>
+<p>Because merging fixes records, not sources. An import, form or integration that creates new contacts without matching on email will keep making duplicates until it is changed.</p>
+<h3>How do I see what created a HubSpot contact?</h3>
+<p>Add the Record source and Record source detail properties as columns in a contact view. They show whether a record came from an import, form, integration, sales rep or app.</p>
+<h3>Do Zapier and Make create duplicate HubSpot contacts?</h3>
+<p>They can, when the step uses a plain create action. Use a find-or-create or create-or-update action that searches by email first.</p>
+<h3>Does HubSpot merge contacts with different emails automatically?</h3>
+<p>No. HubSpot matches on email address, so the same person with two addresses stays as two contacts until someone finds and merges them.</p>
+<h3>How often should I check for new duplicates?</h3>
+<p>Monthly is enough for most teams: look at contacts created in the last 30 days and merge the real pairs before they reach lists and reports.</p>
+<footer><p>Related guides: <a href="/guides/prevent-duplicate-contacts-hubspot-import/">Stop imports creating duplicates</a> <a href="/guides/hubspot-duplicate-contacts-different-emails/">Duplicates with different emails</a> <a href="/guides/find-duplicate-contacts-hubspot/">Find duplicate contacts in HubSpot</a> <a href="/products/">All Myzles tools and prices</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. HubSpot is a trademark of HubSpot, Inc. This site and its tools are not made, endorsed or reviewed by HubSpot. Menus and property names change, so check HubSpot's own help pages for your account. Checked November 2026.</p></footer>
+</main></body></html>

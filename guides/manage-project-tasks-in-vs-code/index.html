@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to keep project tasks inside VS Code: TODO comments, a todo.md, or an extension</title>
+<meta name="description" content="Three ways developers track project-specific tasks without leaving VS Code, when each one works, and how to see every TODO comment in a project at a glance.">
+<link rel="canonical" href="https://myzles.github.io/guides/manage-project-tasks-in-vs-code/">
+<meta property="og:type" content="article"><meta property="og:title" content="How to keep project tasks inside VS Code: TODO comments, a todo.md, or an extension"><meta property="og:description" content="Three ways developers track project-specific tasks without leaving VS Code, when each one works, and how to see every TODO comment in a project at a glance."><meta property="og:url" content="https://myzles.github.io/guides/manage-project-tasks-in-vs-code/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to keep project tasks inside VS Code: TODO comments, a todo.md, or an extension", "description": "Three ways developers track project-specific tasks without leaving VS Code, when each one works, and how to see every TODO comment in a project at a glance.", "mainEntityOfPage": "https://myzles.github.io/guides/manage-project-tasks-in-vs-code/", "datePublished": "2026-11-25", "dateModified": "2026-11-25", "author": {"@type": "Person", "name": "Myles"}, "publisher": {"@type": "Organization", "name": "Myzles (Swag Studios)"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the best way to track tasks inside VS Code?", "acceptedAnswer": {"@type": "Answer", "text": "For code-level tasks, TODO comments next to the code plus a list view that gathers them. For chores not tied to code, a todo.md or your issue tracker works well."}}, {"@type": "Question", "name": "Should TODO comments be committed?", "acceptedAnswer": {"@type": "Answer", "text": "Short-lived ones are fine and help reviewers see unfinished work. Add an owner or ticket to anything that will live longer than the branch, and review old ones regularly."}}, {"@type": "Question", "name": "How do I see all TODO comments in a VS Code project?", "acceptedAnswer": {"@type": "Answer", "text": "Use Search with a regex like TODO|FIXME with Match Whole Word on, or install an extension that lists TODO comments in a tree."}}, {"@type": "Question", "name": "Is a todo.md file better than TODO comments?", "acceptedAnswer": {"@type": "Answer", "text": "They do different jobs. A todo.md suits project chores; TODO comments suit tasks tied to specific code. Many teams use both."}}, {"@type": "Question", "name": "Do TODO extensions work in Cursor?", "acceptedAnswer": {"@type": "Answer", "text": "Most VS Code extensions work in Cursor if they are on Open VSX or installed from a .vsix file. See the guide on TODOs in Cursor."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; <a href="/guides/">Guides</a></p>
+<h1>How to keep project tasks inside VS Code: TODO comments, a todo.md, or an extension</h1>
+<p>A question that comes up again and again in VS Code communities: where do you keep the small, project-specific tasks? Not the big tickets in Jira or GitHub Issues, but "handle the empty state here", "rename this after the migration", "remove this hack before release". A separate to-do app adds friction, and those tasks get lost.</p>
+<p>Developers mostly settle on one of three approaches, often two together.</p>
+
+<h2>Option 1: TODO comments next to the code</h2>
+<p>Write <code>// TODO: handle empty list</code> right where the work is. The task lives with the code it's about, travels with the branch, and shows up in code review.</p>
+<ul>
+<li><strong>Good for:</strong> anything tied to a specific line or file. This is most small dev tasks.</li>
+<li><strong>Weak at:</strong> seeing them all at once. They're scattered across hundreds of files, and old ones pile up unnoticed.</li>
+<li><strong>Make it work:</strong> agree on a few tags (TODO, FIXME, HACK), add a name or ticket when it matters (<code>TODO(sam):</code>, <code>TODO #142</code>), and use a list view (below) so they don't get lost.</li>
+</ul>
+
+<h2>Option 2: a todo.md in the repo</h2>
+<p>A Markdown checklist (<code>- [ ] update the readme</code>) at the repo root. VS Code renders the preview, and it's versioned with the project.</p>
+<ul>
+<li><strong>Good for:</strong> tasks that aren't about one line: "write release notes", "ask design about icons". Also fine for small teams sharing a private repo.</li>
+<li><strong>Weak at:</strong> staying current. Nothing links it to the code, so finished items linger and new ones get written somewhere else.</li>
+</ul>
+
+<h2>Option 3: a task extension or the issue tracker</h2>
+<p>Some extensions keep a per-workspace task list in VS Code's own storage; the GitHub Pull Requests extension shows your repo's issues in the sidebar.</p>
+<ul>
+<li><strong>Good for:</strong> personal lists that shouldn't be committed, or work that already lives in issues.</li>
+<li><strong>Weak at:</strong> anything tied to code. The task isn't in the file, so it doesn't follow the branch and reviewers can't see it.</li>
+</ul>
+
+<h2>Which to use</h2>
+<div class="tbl"><table>
+<tr><th></th><th>TODO comments</th><th>todo.md</th><th>Task extension / issues</th></tr>
+<tr><td>Next to the code</td><td>Yes</td><td>No</td><td>No</td></tr>
+<tr><td>Follows the branch and PR</td><td>Yes</td><td>Yes</td><td>No (issues: linked by hand)</td></tr>
+<tr><td>Visible to teammates</td><td>Yes</td><td>Yes</td><td>Issues yes, extension lists usually no</td></tr>
+<tr><td>Easy to see them all</td><td>Only with a list view</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Best for</td><td>Code-level tasks</td><td>Project chores</td><td>Personal lists, bigger work</td></tr>
+</table></div>
+<p>A common, low-friction setup is TODO comments for code tasks plus issues for anything bigger, with a list view so the comments never get lost.</p>
+
+<h2>Seeing every TODO comment in the project</h2>
+<p>Without installing anything, use Search (<code>Ctrl+Shift+F</code>) with regex on and search for <code>TODO|FIXME|HACK</code> (turn on Match Whole Word too). It works, but it also matches strings and variable names, and you have to re-run it. There are more free options in <a href="/guides/list-all-todos-vscode/">how to list all TODOs in VS Code</a>.</p>
+
+<h2>The tool I built (disclosure)</h2>
+<p>I made <a href="https://go.myzles.workers.dev/todo-lens/site-seo">Todoscope</a> for the list view. It scans the project with its own scanner that only counts tags inside real comments, shows a tree you can filter by tag, file or folder, highlights tags in the editor, and updates as you type. Those parts are free. Pro adds reports, git blame age (find the TODOs that are two years old) and a list of TODOs added on your current branch, so you can clean up before a PR. It works in VS Code, Cursor, Windsurf and VSCodium.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/todo-lens/site-seo">Install Todoscope free</a></p>
+
+<h2>FAQ</h2>
+<h3>What is the best way to track tasks inside VS Code?</h3>
+<p>For code-level tasks, TODO comments next to the code plus a list view that gathers them. For chores not tied to code, a todo.md or your issue tracker works well.</p>
+<h3>Should TODO comments be committed?</h3>
+<p>Short-lived ones are fine and help reviewers see unfinished work. Add an owner or ticket to anything that will live longer than the branch, and review old ones regularly.</p>
+<h3>How do I see all TODO comments in a VS Code project?</h3>
+<p>Use Search with a regex like TODO|FIXME with Match Whole Word on, or install an extension that lists TODO comments in a tree.</p>
+<h3>Is a todo.md file better than TODO comments?</h3>
+<p>They do different jobs. A todo.md suits project chores; TODO comments suit tasks tied to specific code. Many teams use both.</p>
+<h3>Do TODO extensions work in Cursor?</h3>
+<p>Most VS Code extensions work in Cursor if they are on Open VSX or installed from a .vsix file. See the guide on TODOs in Cursor.</p>
+<footer><p>Related guides: <a href="/guides/list-all-todos-vscode/">List all TODOs in VS Code</a> <a href="/guides/find-todos-added-in-a-branch/">TODOs added on a branch</a> <a href="/guides/todo-list-in-cursor/">TODOs in Cursor</a> <a href="/products/">All Myzles tools and prices</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. VS Code is a trademark of Microsoft Corporation. This site and its tools are not made or endorsed by Microsoft. Checked November 2026.</p></footer>
+</main></body></html>
