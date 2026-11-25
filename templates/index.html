@@ -50,6 +50,19 @@ footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-si
 <li>Add <strong>Slack &rsaquo; Create a Message</strong> (or Gmail) with <code>{{company}}: score {{signalScore}}, {{openRoles}} open roles. {{buyingSignalsText}}</code>.</li>
 </ol>
 
+<h2>3. Owners and decision makers for a list of company websites</h2>
+<p>Give it company websites (or a Google Maps lead list) and get one row per owner, partner or director the company lists on its own team, about or imprint pages: name, title, seniority, and an email marked listed on the site or guessed from the company format, using <a href="https://go.myzles.workers.dev/decision-maker-finder/site-seo">Decision Maker Finder</a>. It costs $5 per 1,000 people found and nothing when a site lists nobody.</p>
+<h3>n8n</h3>
+<p><a class="btn" href="n8n-decision-maker-finder.json" download>Download the n8n workflow</a></p>
+<p>Import it, pick your Header Auth credential in <em>Find decision makers</em> and edit the list in <em>Company websites</em>. <em>Only rows with a person</em> drops companies that list nobody publicly. Add a Google Sheets or CRM node at the end. If you only want emails printed on the site, set <code>guessEmails</code> to <code>false</code> in the request body.</p>
+<h3>Make</h3>
+<ol>
+<li>Add <strong>Apify &rsaquo; Run an Actor</strong>. Actor: <code>myzles/decision-maker-finder</code>. Run synchronously: <strong>Yes</strong>. Input JSON: <code>{"websites": ["smithlawgroup.com", "brightagency.co.uk"], "onlyDecisionMakers": true}</code>.</li>
+<li>Add <strong>Apify &rsaquo; Get Dataset Items</strong> with the dataset ID from step 1.</li>
+<li>Add a filter: <code>name</code> exists.</li>
+<li>Add <strong>Google Sheets &rsaquo; Add a Row</strong> and map <code>companyName</code>, <code>name</code>, <code>jobTitle</code>, <code>email</code>, <code>emailSource</code> and <code>phone</code>.</li>
+</ol>
+
 <h2>Other tools these work with</h2>
 <p>The same pattern (Run an Actor, then Get Dataset Items) works with <a href="https://apify.com/myzles/decision-maker-finder">Decision Maker Finder</a>, <a href="https://apify.com/myzles/telegram-channel-scraper">Telegram Channel Scraper</a> and <a href="https://apify.com/myzles/google-ads-transparency-scraper">Google Ads Transparency Scraper</a>. Change the actor name and the input.</p>
 

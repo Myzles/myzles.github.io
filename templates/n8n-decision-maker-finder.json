@@ -1,0 +1,232 @@
+{
+  "name": "Find owners and decision makers for a list of company websites (Apify Decision Maker Finder)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "72a3007d-ccef-4b2b-a490-b9a900da2552",
+      "name": "Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"websites\": [\n    \"smithlawgroup.com\",\n    \"https://www.example-dental.com\",\n    \"brightagency.co.uk\"\n  ]\n}",
+        "options": {}
+      },
+      "id": "0b1b3528-610b-414d-bc50-36fab013ae60",
+      "name": "Company websites",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/myzles~decision-maker-finder/run-sync-get-dataset-items",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "clean",
+              "value": "true"
+            },
+            {
+              "name": "timeout",
+              "value": "280"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ websites: $json.websites, onlyDecisionMakers: true, guessEmails: true }) }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "e7401393-024a-47aa-910b-c5b40892ad8b",
+      "name": "Find decision makers",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Apify API token (Header Auth: Authorization = Bearer YOUR_TOKEN)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "a18f6488-30eb-4eb9-a131-c63c53458f30",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f377bfb5-b3c6-4fcb-9fc6-8bd320c48f00",
+      "name": "Only rows with a person",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "11718c81-d6ad-4780-8ea6-d3ab0711b620",
+              "name": "companyName",
+              "value": "={{ $json.companyName }}",
+              "type": "string"
+            },
+            {
+              "id": "e446e60e-ef8c-450b-8d97-6729982004a0",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "b7cec07d-a5d8-4890-abb0-a16813382897",
+              "name": "jobTitle",
+              "value": "={{ $json.jobTitle }}",
+              "type": "string"
+            },
+            {
+              "id": "5a58c344-ac79-44b3-bbd9-0701ecf0f2ab",
+              "name": "seniority",
+              "value": "={{ $json.seniority }}",
+              "type": "string"
+            },
+            {
+              "id": "8c9aaf0c-2036-4e26-9633-69d4a6fc1fdd",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "d26798a8-9bc5-4006-a0a1-63f4b985dcdc",
+              "name": "emailSource",
+              "value": "={{ $json.emailSource }}",
+              "type": "string"
+            },
+            {
+              "id": "8acc968a-fabc-4595-b3dd-1ec792f3f0a0",
+              "name": "phone",
+              "value": "={{ $json.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "bafc9808-bacb-4feb-968c-12a1413b6f0a",
+              "name": "linkedin",
+              "value": "={{ $json.linkedin }}",
+              "type": "string"
+            },
+            {
+              "id": "e3caac43-25a1-4c78-be1f-d1c01d449e0d",
+              "name": "website",
+              "value": "={{ $json.website }}",
+              "type": "string"
+            },
+            {
+              "id": "5be3de44-d9c9-44de-8ac8-ea203c10d9c5",
+              "name": "sourcePage",
+              "value": "={{ $json.sourcePage }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6dac8f77-f2db-4f09-bd4c-63f87d13a2d3",
+      "name": "Keep the useful columns",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Company websites",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Company websites": {
+      "main": [
+        [
+          {
+            "node": "Find decision makers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find decision makers": {
+      "main": [
+        [
+          {
+            "node": "Only rows with a person",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Only rows with a person": {
+      "main": [
+        [
+          {
+            "node": "Keep the useful columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
