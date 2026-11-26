@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to build a list of law firm partners and their emails</title>
+<meta name="description" content="Where law firms publish their attorneys, how to pull partner names, titles and direct emails from firm websites, and how to do it for hundreds of firms.">
+<link rel="canonical" href="https://myzles.github.io/guides/law-firm-attorney-list-emails/">
+<meta property="og:type" content="article"><meta property="og:title" content="How to build a list of law firm partners and their emails"><meta property="og:description" content="Where law firms publish their attorneys, how to pull partner names, titles and direct emails from firm websites, and how to do it for hundreds of firms."><meta property="og:url" content="https://myzles.github.io/guides/law-firm-attorney-list-emails/">
+<style>:root{--ink:#1f2328;--muted:#57606a;--bg:#fff;--line:#d8dee4;--accent:#1a64d6;--soft:#f4f6f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e6edf3;--muted:#9aa4af;--bg:#0d1117;--line:#30363d;--accent:#6ea8fe;--soft:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:760px;margin:0 auto;padding:32px 16px 56px}a{color:var(--accent)}h1{font-size:30px;line-height:1.25;margin:8px 0 12px}
+h2{font-size:21px;margin-top:36px}h3{font-size:17px;margin:20px 0 4px}.muted{color:var(--muted)}.crumb{font-size:14px}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--soft)}.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0d1117}}code{background:var(--soft);padding:1px 4px;border-radius:4px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:16px;font-size:14px;color:var(--muted)}footer a{margin-right:12px;display:inline-block}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to build a list of law firm partners and their emails", "description": "Where law firms publish their attorneys, how to pull partner names, titles and direct emails from firm websites, and how to do it for hundreds of firms.", "mainEntityOfPage": "https://myzles.github.io/guides/law-firm-attorney-list-emails/", "datePublished": "2026-11-26", "dateModified": "2026-11-26", "author": {"@type": "Person", "name": "Myles"}, "publisher": {"@type": "Organization", "name": "Myzles (Swag Studios)"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where can I find a list of law firm partners?", "acceptedAnswer": {"@type": "Answer", "text": "On each firm's own website: the attorneys or people directory and the individual bio pages. Bar association directories and Google Maps help you build the list of firms first."}}, {"@type": "Question", "name": "Do law firms publish attorney email addresses?", "acceptedAnswer": {"@type": "Answer", "text": "Many do, on each attorney bio page. Some use contact forms instead; then the firm email format from another attorney is a good guess to verify."}}, {"@type": "Question", "name": "Which titles are decision makers at a law firm?", "acceptedAnswer": {"@type": "Answer", "text": "Managing partner, founding or name partner, and senior partners, plus the office manager or COO for operations purchases. Associates rarely buy."}}, {"@type": "Question", "name": "Is it legal to email lawyers whose addresses are public?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on your country and theirs. Many places allow B2B email with an easy opt-out; some EU countries are stricter. Check before you send."}}, {"@type": "Question", "name": "Can I scrape LinkedIn for law firm partners instead?", "acceptedAnswer": {"@type": "Answer", "text": "LinkedIn's terms forbid scraping. The firm's own website is public, usually more current, and more likely to have a direct email."}}]}</script>
+</head><body><main>
+<p class="crumb muted"><a href="/">Myzles</a> &rsaquo; <a href="/guides/">Guides</a></p>
+<h1>How to build a list of law firm partners and their emails</h1>
+<p>Law firms are one of the easiest professions to prospect, because almost every firm publishes its people. Partner pages usually list a name, a title, a practice area, and often a direct email and phone. The hard part is doing it for more than a handful of firms.</p>
+
+<h2>Where firms list their attorneys</h2>
+<div class="tbl"><table>
+<tr><th>Page</th><th>Usually called</th><th>What's on it</th></tr>
+<tr><td>People directory</td><td>Attorneys, Our People, Professionals, Lawyers, Team</td><td>Every lawyer with title and office; large firms add filters</td></tr>
+<tr><td>Bio page</td><td>One page per attorney</td><td>Direct email, phone, bar admissions, practice areas, vCard</td></tr>
+<tr><td>About / Firm</td><td>About us, Our firm</td><td>Founding or managing partners at small firms</td></tr>
+<tr><td>Imprint (EU)</td><td>Impressum, Legal notice, Mentions légales</td><td>Partners or managing directors named by law</td></tr>
+</table></div>
+<p>Titles to look for when you want decision makers: managing partner, founding partner, name partner, senior partner, partner, and at in-house teams, general counsel. "Associate", "of counsel" and "paralegal" are usually not the buyer.</p>
+
+<h2>By hand, for a few firms</h2>
+<ol>
+<li>Open the firm's site and find the attorneys page (check the main menu and the footer).</li>
+<li>Filter or scan for partners. Open each bio for the direct email.</li>
+<li>If the bio has a contact form instead of an email, look at any other attorney's address to learn the format (often first.last@ or the first initial plus last name@) and keep it marked as a guess.</li>
+<li>Note the practice area, because "partner, employment law" and "partner, M&amp;A" are different buyers.</li>
+</ol>
+
+<h2>For hundreds of firms</h2>
+<ol>
+<li>Get firm websites from a directory, a bar association listing or a Google Maps search like "law firm" in your target cities.</li>
+<li>Run the websites through a tool that reads each firm's own people and bio pages.</li>
+<li>Keep listed emails and guessed emails in separate columns, and verify guesses before you send.</li>
+<li>Check the email rules that apply to you. Lawyers are quick to notice careless outreach.</li>
+</ol>
+
+<h2>The tool I built (disclosure)</h2>
+<p>I made <a href="https://go.myzles.workers.dev/decision-maker-finder/site-seo">Decision Maker Finder</a> on Apify for step 2. You give it firm websites (or a Google Maps dataset) and it reads the team, about, imprint and bio pages, then returns one row per person with name, exact title, seniority, a decision-maker flag, email marked "listed on the website" or "guessed from the company email format", direct phone and the page it came from. Law firms are one of the business types it was tested on, in English, German, French and Spanish. It costs $5 per 1,000 people found and nothing for firms that list nobody. No LinkedIn scraping and no login.</p>
+<p><a class="btn" href="https://go.myzles.workers.dev/decision-maker-finder/site-seo">Try Decision Maker Finder</a></p>
+<p class="muted">Ready-made n8n and Make workflows for it are on the <a href="/templates/">templates page</a>.</p>
+
+<h2>FAQ</h2>
+<h3>Where can I find a list of law firm partners?</h3>
+<p>On each firm&#x27;s own website: the attorneys or people directory and the individual bio pages. Bar association directories and Google Maps help you build the list of firms first.</p>
+<h3>Do law firms publish attorney email addresses?</h3>
+<p>Many do, on each attorney bio page. Some use contact forms instead; then the firm email format from another attorney is a good guess to verify.</p>
+<h3>Which titles are decision makers at a law firm?</h3>
+<p>Managing partner, founding or name partner, and senior partners, plus the office manager or COO for operations purchases. Associates rarely buy.</p>
+<h3>Is it legal to email lawyers whose addresses are public?</h3>
+<p>It depends on your country and theirs. Many places allow B2B email with an easy opt-out; some EU countries are stricter. Check before you send.</p>
+<h3>Can I scrape LinkedIn for law firm partners instead?</h3>
+<p>LinkedIn&#x27;s terms forbid scraping. The firm&#x27;s own website is public, usually more current, and more likely to have a direct email.</p>
+<footer><p>Related guides: <a href="/guides/find-decision-makers-at-a-company/">Find decision makers at a company</a> <a href="/guides/find-business-owner-email-not-info/">Owner email instead of info@</a> <a href="/guides/google-maps-leads-to-emails/">Google Maps leads to emails</a> <a href="/products/">All Myzles tools and prices</a></p><p>Written by Myles at Myzles (Swag Studios). Contact: <a href="mailto:swagstudios.helpdesk@outlook.com">swagstudios.helpdesk@outlook.com</a>. Apify is a trademark of Apify Technologies. This tool is not made or endorsed by Apify. Follow the data protection and email laws that apply to you. Checked November 2026.</p></footer>
+</main></body></html>
